@@ -54,6 +54,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="livePhotoView" destination="4lx-hk-Esn" id="I74-1t-ADx"/>
+                        <outlet property="scrollView" destination="AgN-Ob-tvC" id="llI-my-qqi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

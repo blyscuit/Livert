@@ -15,7 +15,8 @@ class ViewController: UIViewController {
 
     // MARK: - Properties
 
-    @IBOutlet weak var livePhotoView: PHLivePhotoView!
+	@IBOutlet weak var scrollView: UIScrollView!
+	@IBOutlet weak var livePhotoView: PHLivePhotoView!
 	var livePhoto: PHLivePhoto!
 	var images: [CIImage] = []
 	var effectList = ["CISepiaTone", "CIPhotoEffectInstant", "CIPhotoEffectNoir", "CIColorInvert"]
