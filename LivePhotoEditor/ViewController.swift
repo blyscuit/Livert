@@ -16,6 +16,9 @@ class ViewController: UIViewController {
     // MARK: - Properties
 
     @IBOutlet weak var livePhotoView: PHLivePhotoView!
+	var livePhoto: PHLivePhoto!
+	var images: [CIImage] = []
+	var effectList = ["CISepiaTone", "CIPhotoEffectInstant", "CIPhotoEffectNoir", "CIColorInvert"]
     
     private var targetSize: CGSize {
         let scale = UIScreen.main.scale
@@ -117,8 +120,45 @@ class ViewController: UIViewController {
                                                     
                                                     // Now that we have the Live Photo, show it.
                                                     self.livePhotoView.livePhoto = livePhoto
+													self.livePhoto = livePhoto
+													self.generatePreviews()
         })
     }
+	
+	func generatePreviews() {
+		images.removeAll()
+		
+		guard let asset = self.asset else { return }
+		
+		
+		let formatIdentifier = Bundle.main.bundleIdentifier!
+		let formatVersion = "1.0"
+		
+		// Set up a handler to make sure we can handle prior edits.
+		let options = PHContentEditingInputRequestOptions()
+		options.canHandleAdjustmentData = { adjustmentData in
+			return adjustmentData.formatIdentifier == formatIdentifier && adjustmentData.formatVersion == formatVersion
+		}
+		
+		// Check whether the asset supports the content editing operation
+		if !asset.canPerform(.content) { return }
+		
+		// Request PHContentEditingInput
+		asset.requestContentEditingInput(with: options, completionHandler: { input, info in
+			guard let input = input else { fatalError("can't get content editing input: \(info)") }
+			
+			// Create PHLivePhotoEditingContext from PHContentEditingInput
+			guard let livePhotoContext = PHLivePhotoEditingContext(livePhotoEditingInput: input) else { fatalError("can't get live photo to edit") }
+			
+			if #available(iOS 11.0, *) {
+				for effect in self.effectList {
+					self.images.append(livePhotoContext.fullSizeImage.applyingFilter(effect))
+				}
+			} else {
+				// Fallback on earlier versions
+			}
+		})
+	}
     
     private func applyFilter(_ filterName: String) {
         guard let asset = self.asset else { return }
