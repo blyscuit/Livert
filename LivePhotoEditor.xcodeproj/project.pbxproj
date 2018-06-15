@@ -12,6 +12,7 @@
 		7315F90F20D3D38A00C5C95B /* BankCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7315F90B20D3D38A00C5C95B /* BankCollectionViewCell.xib */; };
 		7315F91020D3D38A00C5C95B /* BankCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F90C20D3D38A00C5C95B /* BankCollectionViewCell.swift */; };
 		7315F91120D3D38A00C5C95B /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F90D20D3D38A00C5C95B /* ImageCollectionViewCell.swift */; };
+		7315F91420D3D3F500C5C95B /* MockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F91320D3D3F500C5C95B /* MockViewController.swift */; };
 		C9A730E71DAC7D4C001A6281 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A730E61DAC7D4C001A6281 /* AppDelegate.swift */; };
 		C9A730E91DAC7D4C001A6281 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A730E81DAC7D4C001A6281 /* ViewController.swift */; };
 		C9A730EC1DAC7D4C001A6281 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9A730EA1DAC7D4C001A6281 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 		7315F90B20D3D38A00C5C95B /* BankCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BankCollectionViewCell.xib; sourceTree = "<group>"; };
 		7315F90C20D3D38A00C5C95B /* BankCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCollectionViewCell.swift; sourceTree = "<group>"; };
 		7315F90D20D3D38A00C5C95B /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		7315F91320D3D3F500C5C95B /* MockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewController.swift; sourceTree = "<group>"; };
 		C9A730E31DAC7D4C001A6281 /* LivePhotoEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivePhotoEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9A730E61DAC7D4C001A6281 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9A730E81DAC7D4C001A6281 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				7315F90820D3D37900C5C95B /* TLTProgessView.swift */,
+				7315F91320D3D3F500C5C95B /* MockViewController.swift */,
 				7315F90C20D3D38A00C5C95B /* BankCollectionViewCell.swift */,
 				7315F90B20D3D38A00C5C95B /* BankCollectionViewCell.xib */,
 				7315F90A20D3D38A00C5C95B /* GlassViewController.swift */,
@@ -185,6 +188,7 @@
 				7315F91120D3D38A00C5C95B /* ImageCollectionViewCell.swift in Sources */,
 				7315F91020D3D38A00C5C95B /* BankCollectionViewCell.swift in Sources */,
 				7315F90920D3D37A00C5C95B /* TLTProgessView.swift in Sources */,
+				7315F91420D3D3F500C5C95B /* MockViewController.swift in Sources */,
 				7315F90E20D3D38A00C5C95B /* GlassViewController.swift in Sources */,
 				C9A730E91DAC7D4C001A6281 /* ViewController.swift in Sources */,
 				C9A730E71DAC7D4C001A6281 /* AppDelegate.swift in Sources */,

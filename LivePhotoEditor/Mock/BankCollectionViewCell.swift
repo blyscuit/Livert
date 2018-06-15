@@ -35,7 +35,7 @@ class BankCollectionViewCell: UICollectionViewCell {
         cellOutline.layer.cornerRadius = 6.0
         cellOutline.layer.borderColor = #colorLiteral(red: 0.8823529412, green: 0.8823529412, blue: 0.8823529412, alpha: 1)
         cellOutline.layer.borderWidth = 0.5
-        cellOutline.layer.applySketchShadow(alpha: 0.2, x: 0, y: 1, blur: 8.8, spread: 0.2)
+//        cellOutline.layer.applySketchShadow(alpha: 0.2, x: 0, y: 1, blur: 8.8, spread: 0.2)
     }
     
     func toggleBorder(_ active: Bool) {

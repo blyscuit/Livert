@@ -27,15 +27,14 @@ class TLTProgessView: UIControl {
         get{
             return _progress
         }set{
-//            _progress = newValue
-            _progress = 0
-            CATransaction.setAnimationDuration(2)
-            CATransaction.setDisableActions(true)
+            _progress = newValue
+//            _progress = 0
+            CATransaction.setAnimationDuration(0.5)
+            CATransaction.setDisableActions(false)
             CATransaction.begin()
             
-            _progress = 1      // Easier than recentering the position on bounds change
-            
-//            CATransaction.commit()
+            updateLayerFrames()
+            CATransaction.commit()
         }
     }
 
@@ -77,5 +76,9 @@ class TLTProgessView: UIControl {
             pgLayer.strokeEnd = _progress
             self.clipsToBounds = true
         }
+    }
+    
+    func updateLayerFrames() {
+        pgLayer.strokeEnd = _progress
     }
 }
