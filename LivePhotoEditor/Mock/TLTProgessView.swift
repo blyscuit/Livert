@@ -28,11 +28,9 @@ class TLTProgessView: UIControl {
             return _progress
         }set{
             _progress = newValue
-//            _progress = 0
             CATransaction.setAnimationDuration(0.5)
             CATransaction.setDisableActions(false)
             CATransaction.begin()
-            
             updateLayerFrames()
             CATransaction.commit()
         }
