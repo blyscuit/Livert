@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7315F90920D3D37A00C5C95B /* TLTProgessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F90820D3D37900C5C95B /* TLTProgessView.swift */; };
+		7315F90E20D3D38A00C5C95B /* GlassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F90A20D3D38A00C5C95B /* GlassViewController.swift */; };
+		7315F90F20D3D38A00C5C95B /* BankCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7315F90B20D3D38A00C5C95B /* BankCollectionViewCell.xib */; };
+		7315F91020D3D38A00C5C95B /* BankCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F90C20D3D38A00C5C95B /* BankCollectionViewCell.swift */; };
+		7315F91120D3D38A00C5C95B /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F90D20D3D38A00C5C95B /* ImageCollectionViewCell.swift */; };
 		C9A730E71DAC7D4C001A6281 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A730E61DAC7D4C001A6281 /* AppDelegate.swift */; };
 		C9A730E91DAC7D4C001A6281 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A730E81DAC7D4C001A6281 /* ViewController.swift */; };
 		C9A730EC1DAC7D4C001A6281 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9A730EA1DAC7D4C001A6281 /* Main.storyboard */; };
@@ -27,6 +32,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7315F90820D3D37900C5C95B /* TLTProgessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLTProgessView.swift; sourceTree = "<group>"; };
+		7315F90A20D3D38A00C5C95B /* GlassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlassViewController.swift; sourceTree = "<group>"; };
+		7315F90B20D3D38A00C5C95B /* BankCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BankCollectionViewCell.xib; sourceTree = "<group>"; };
+		7315F90C20D3D38A00C5C95B /* BankCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankCollectionViewCell.swift; sourceTree = "<group>"; };
+		7315F90D20D3D38A00C5C95B /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		C9A730E31DAC7D4C001A6281 /* LivePhotoEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivePhotoEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9A730E61DAC7D4C001A6281 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9A730E81DAC7D4C001A6281 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +64,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7315F91220D3D38F00C5C95B /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				7315F90820D3D37900C5C95B /* TLTProgessView.swift */,
+				7315F90C20D3D38A00C5C95B /* BankCollectionViewCell.swift */,
+				7315F90B20D3D38A00C5C95B /* BankCollectionViewCell.xib */,
+				7315F90A20D3D38A00C5C95B /* GlassViewController.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		C9A730DA1DAC7D4C001A6281 = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +95,8 @@
 		C9A730E51DAC7D4C001A6281 /* LivePhotoEditor */ = {
 			isa = PBXGroup;
 			children = (
+				7315F91220D3D38F00C5C95B /* Mock */,
+				7315F90D20D3D38A00C5C95B /* ImageCollectionViewCell.swift */,
 				C9A730E61DAC7D4C001A6281 /* AppDelegate.swift */,
 				C9A730E81DAC7D4C001A6281 /* ViewController.swift */,
 				C9A730EA1DAC7D4C001A6281 /* Main.storyboard */,
@@ -147,6 +170,7 @@
 			files = (
 				C9A730F11DAC7D4C001A6281 /* LaunchScreen.storyboard in Resources */,
 				C9A730EE1DAC7D4C001A6281 /* Assets.xcassets in Resources */,
+				7315F90F20D3D38A00C5C95B /* BankCollectionViewCell.xib in Resources */,
 				C9A730EC1DAC7D4C001A6281 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +182,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7315F91120D3D38A00C5C95B /* ImageCollectionViewCell.swift in Sources */,
+				7315F91020D3D38A00C5C95B /* BankCollectionViewCell.swift in Sources */,
+				7315F90920D3D37A00C5C95B /* TLTProgessView.swift in Sources */,
+				7315F90E20D3D38A00C5C95B /* GlassViewController.swift in Sources */,
 				C9A730E91DAC7D4C001A6281 /* ViewController.swift in Sources */,
 				C9A730E71DAC7D4C001A6281 /* AppDelegate.swift in Sources */,
 			);
