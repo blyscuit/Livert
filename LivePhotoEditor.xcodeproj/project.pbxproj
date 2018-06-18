@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6882F53120D403A90035F272 /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6882F53020D403A80035F272 /* ImageCollectionViewCell.xib */; };
 		7315F90920D3D37A00C5C95B /* TLTProgessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F90820D3D37900C5C95B /* TLTProgessView.swift */; };
 		7315F90E20D3D38A00C5C95B /* GlassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F90A20D3D38A00C5C95B /* GlassViewController.swift */; };
 		7315F90F20D3D38A00C5C95B /* BankCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7315F90B20D3D38A00C5C95B /* BankCollectionViewCell.xib */; };
@@ -33,6 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6882F53020D403A80035F272 /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		7315F90820D3D37900C5C95B /* TLTProgessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLTProgessView.swift; sourceTree = "<group>"; };
 		7315F90A20D3D38A00C5C95B /* GlassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlassViewController.swift; sourceTree = "<group>"; };
 		7315F90B20D3D38A00C5C95B /* BankCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BankCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				7315F91220D3D38F00C5C95B /* Mock */,
 				7315F90D20D3D38A00C5C95B /* ImageCollectionViewCell.swift */,
+				6882F53020D403A80035F272 /* ImageCollectionViewCell.xib */,
 				C9A730E61DAC7D4C001A6281 /* AppDelegate.swift */,
 				C9A730E81DAC7D4C001A6281 /* ViewController.swift */,
 				C9A730EA1DAC7D4C001A6281 /* Main.storyboard */,
@@ -175,6 +178,7 @@
 				C9A730EE1DAC7D4C001A6281 /* Assets.xcassets in Resources */,
 				7315F90F20D3D38A00C5C95B /* BankCollectionViewCell.xib in Resources */,
 				C9A730EC1DAC7D4C001A6281 /* Main.storyboard in Resources */,
+				6882F53120D403A90035F272 /* ImageCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

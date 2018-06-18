@@ -15,9 +15,10 @@ class ViewController: UIViewController {
 
     // MARK: - Properties
 
-	@IBOutlet weak var scrollView: UIScrollView!
+	
+	@IBOutlet weak var collectionView: UICollectionView!
 	@IBOutlet weak var livePhotoView: PHLivePhotoView!
-	var livePhoto: PHLivePhoto!
+	var showLivePhoto: PHLivePhoto!
 	var images: [CIImage] = []
 	var effectList = ["CISepiaTone", "CIPhotoEffectInstant", "CIPhotoEffectNoir", "CIColorInvert"]
     
@@ -34,6 +35,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         PHPhotoLibrary.shared().register(self)
+		
+		collectionView.backgroundColor = UIColor.clear
+		collectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
+		collectionView.delegate = self
+		collectionView.dataSource = self
+		
+		let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+		let blurEffectView = UIVisualEffectView(effect: blurEffect)
+		blurEffectView.frame = view.bounds
+		blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		view.insertSubview(blurEffectView, aboveSubview: livePhotoView)
     }
     
     deinit {
@@ -121,8 +133,8 @@ class ViewController: UIViewController {
                                                     
                                                     // Now that we have the Live Photo, show it.
                                                     self.livePhotoView.livePhoto = livePhoto
-													self.livePhoto = livePhoto
 													self.generatePreviews()
+													
         })
     }
 	
@@ -158,6 +170,7 @@ class ViewController: UIViewController {
 			} else {
 				// Fallback on earlier versions
 			}
+			self.collectionView.reloadData()
 		})
 	}
     
@@ -215,6 +228,48 @@ class ViewController: UIViewController {
             }
         })
     }
+	
+	fileprivate func applyFilterPreview(_ filterName: String) {
+		guard let asset = self.asset else { return }
+		
+		let formatIdentifier = Bundle.main.bundleIdentifier!
+		let formatVersion = "1.0"
+		
+		// Set up a handler to make sure we can handle prior edits.
+		let options = PHContentEditingInputRequestOptions()
+		options.canHandleAdjustmentData = { adjustmentData in
+			return adjustmentData.formatIdentifier == formatIdentifier && adjustmentData.formatVersion == formatVersion
+		}
+		
+		// Check whether the asset supports the content editing operation
+		if !asset.canPerform(.content) { return }
+		
+		// Request PHContentEditingInput
+		asset.requestContentEditingInput(with: options, completionHandler: { input, info in
+			guard let input = input else { fatalError("can't get content editing input: \(info)") }
+			
+			// Create PHAdjustmentData
+			let adjustmentData = PHAdjustmentData(formatIdentifier: formatIdentifier,
+												  formatVersion: formatVersion,
+												  data: filterName.data(using: .utf8)!)
+			
+			// Create PHContentEditingOutput and set PHAdjustmentData
+			let output = PHContentEditingOutput(contentEditingInput: input)
+			output.adjustmentData = adjustmentData
+			
+			// Create PHLivePhotoEditingContext from PHContentEditingInput
+			guard let livePhotoContext = PHLivePhotoEditingContext(livePhotoEditingInput: input) else { fatalError("can't get live photo to edit") }
+			
+			// Set frameProcessor
+			livePhotoContext.frameProcessor = { frame, _ in
+				return frame.image.applyingFilter(filterName, withInputParameters: nil)
+			}
+			
+			livePhotoContext.prepareLivePhotoForPlayback(withTargetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight), options: nil, completionHandler: { photo, error in
+				self.livePhotoView.livePhoto = photo
+			})
+		})
+	}
 	
 	func convert(cmage:CIImage) -> UIImage
 	{
@@ -276,4 +331,32 @@ extension ViewController: UINavigationControllerDelegate, UIImagePickerControlle
         
         dismiss(animated: true, completion: nil)
     }
+}
+
+
+extension ViewController: UICollectionViewDataSource {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return effectList.count
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		
+		let cell = collectionView.dequeueReusableCell(
+			withReuseIdentifier: "cell", for: indexPath) as! ImageCollectionViewCell
+		if images.count > indexPath.row {
+			cell.mainImage.image = UIImage(ciImage: images[indexPath.row])
+		}
+		
+		return cell
+	}
+	
+	
+}
+
+extension ViewController: UICollectionViewDelegate {
+	func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//		livePhotoView.livePhoto = showLivePhoto
+		applyFilterPreview(effectList[indexPath.row])
+	}
+	
 }
