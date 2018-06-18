@@ -15,6 +15,13 @@ class TLTProgessView: UIControl {
 
         }
     }
+    
+    @IBInspectable var thumbImageName: String = "carside" {
+        didSet {
+            updateLayerFrames()
+        }
+    }
+    
     fileprivate var _progress : CGFloat = 0.5 {
         didSet{
            #if TARGET_INTERFACE_BUILDER
@@ -47,6 +54,10 @@ class TLTProgessView: UIControl {
         let  p = UIBezierPath()
         return p
     }()
+    lazy var headerImage : CALayer = {
+        let  p = CALayer()
+        return p
+    }()
     override init(frame: CGRect) {
         super.init(frame: frame)
         sharedInitilization()
@@ -72,11 +83,24 @@ class TLTProgessView: UIControl {
             pgLayer.lineWidth = height
             pgLayer.strokeStart = 0.0
             pgLayer.strokeEnd = _progress
+            
+            let imageHeight = height * 12/5
+            let imageWidth = imageHeight * 25/12
+                
+            headerImage.frame = CGRect(x: _progress * self.bounds.width - imageWidth/7, y: self.bounds.height/2 - height/(3/4), width: imageWidth, height: imageHeight)
+            headerImage.setNeedsDisplay()
+            headerImage.contents = UIImage(named: thumbImageName)?.cgImage
+            headerImage.contentsGravity = kCAGravityResizeAspect
+            layer.addSublayer(headerImage)
+            
             self.clipsToBounds = true
         }
     }
     
     func updateLayerFrames() {
         pgLayer.strokeEnd = _progress
+        let imageHeight = height * 12/5
+        let imageWidth = imageHeight * 25/12
+        headerImage.frame.origin = CGPoint(x: _progress * self.bounds.width - imageWidth/7, y: self.bounds.height/2 - height/(3/4))
     }
 }
