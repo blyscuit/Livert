@@ -20,7 +20,7 @@ class ViewController: UIViewController {
 	@IBOutlet weak var livePhotoView: PHLivePhotoView!
 	var showLivePhoto: PHLivePhoto!
 	var images: [CIImage] = []
-	var effectList = ["CISepiaTone", "CIPhotoEffectInstant", "CIPhotoEffectNoir", "CIColorInvert"]
+	var effectList = ["CIColorCrossPolynomial", "CIColorMonochrome", "CIPhotoEffectChrome", "CIPhotoEffectFade", "CIPhotoEffectInstant", "CIFalseColor", "CIPhotoEffectMono", "CISepiaTone", "CIPhotoEffectProcess", "CIPhotoEffectTonal", "CIPhotoEffectTransfer", "CIVignette", "CIPhotoEffectNoir", "CIColorInvert"]
     
     private var targetSize: CGSize {
         let scale = UIScreen.main.scale
