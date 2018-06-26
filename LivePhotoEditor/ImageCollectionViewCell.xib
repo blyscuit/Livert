@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,13 +20,20 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y0N-di-J7b">
                     <rect key="frame" x="0.0" y="0.0" width="180" height="300"/>
                 </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qul-8I-rPp">
+                    <rect key="frame" x="0.0" y="270" width="180" height="30"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="Qul-8I-rPp" firstAttribute="height" secondItem="vUN-kp-3ea" secondAttribute="height" multiplier="1:10" id="CEV-Dm-cCF"/>
+                <constraint firstItem="Qul-8I-rPp" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="ZEd-BO-Ecg"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="y0N-di-J7b" secondAttribute="bottom" id="bGo-7p-qKg"/>
                 <constraint firstAttribute="trailing" secondItem="y0N-di-J7b" secondAttribute="trailing" id="dEx-j9-pKT"/>
                 <constraint firstItem="y0N-di-J7b" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="i6m-XP-TRM"/>
                 <constraint firstItem="y0N-di-J7b" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="10:10" id="kWT-gB-4TV"/>
+                <constraint firstItem="Qul-8I-rPp" firstAttribute="width" secondItem="vUN-kp-3ea" secondAttribute="width" id="oBL-mf-udG"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Qul-8I-rPp" secondAttribute="bottom" id="oLX-4I-Htu"/>
                 <constraint firstItem="y0N-di-J7b" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xl3-8n-tu8"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
