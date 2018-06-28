@@ -44,7 +44,7 @@ class InspirationsViewController: UICollectionViewController {
 //	var effectList = ["CIPhotoEffectInstant"]//, "CIVignette", "CIPhotoEffectNoir", "CIColorInvert", "CIColorCrossPolynomial", "CIColorMonochrome", "CIPhotoEffectChrome", "CIFalseColor", "CIPhotoEffectMono", "CISepiaTone", "CIPhotoEffectTonal", "CIPhotoEffectTransfer"]
 	
 	private var targetSize: CGSize {
-		let scale = UIScreen.main.scale
+		let scale: CGFloat = 1.1 //UIScreen.main.scale
 		return CGSize(width: self.view.bounds.width * scale,
 					  height: self.view.bounds.height * scale)
 	}
@@ -83,24 +83,43 @@ class InspirationsViewController: UICollectionViewController {
 	fileprivate func updateImage() {
 		guard let asset = self.asset else { return }
 		
-		// Prepare the options to pass when fetching the live photo.
-		let options = PHLivePhotoRequestOptions()
-		options.deliveryMode = .highQualityFormat
-		options.isNetworkAccessAllowed = true
+//		// Prepare the options to pass when fetching the live photo.
+//		let options = PHLivePhotoRequestOptions()
+//		options.deliveryMode = .fastFormat
+////		options.deliveryMode = .highQualityFormat
+//		options.isNetworkAccessAllowed = true
 		
-		// Request the live photo for the asset from the default PHImageManager.
-		PHImageManager.default().requestLivePhoto(for: asset,
-												  targetSize: self.targetSize,
-												  contentMode: .aspectFit,
-												  options: options,
-												  resultHandler: { livePhoto, info in
-													// If successful, show the live photo view and display the live photo.
-													guard let livePhoto = livePhoto else { return }
-													
-													// Now that we have the Live Photo, show it.
-													self.livePhotoView?.livePhoto = livePhoto
-													self.generatePreviews()
-													
+		let photoOptions = PHImageRequestOptions()
+		photoOptions.isNetworkAccessAllowed = true
+		photoOptions.isSynchronous = true
+		photoOptions.deliveryMode = .fastFormat
+		
+//		// Request the live photo for the asset from the default PHImageManager.
+//		PHImageManager.default().requestLivePhoto(for: asset,
+//												  targetSize: self.targetSize,
+//												  contentMode: .aspectFit,
+//												  options: options,
+//												  resultHandler: { livePhoto, info in
+//													// If successful, show the live photo view and display the live photo.
+//													guard let livePhoto = livePhoto else { return }
+//
+//													// Now that we have the Live Photo, show it.
+//													self.livePhotoView?.livePhoto = livePhoto
+////													self.generatePreviews()
+//													return
+//
+//		})
+		
+		PHImageManager.default().requestImage(for: asset, targetSize: self.targetSize, contentMode: .aspectFit, options: photoOptions, resultHandler:  { livePhoto, info in
+			if let livePhoto = livePhoto {
+				self.images.removeAll()
+				
+				self.showingPhoto = CIImage(image: livePhoto)
+				for effect in self.effectList {
+					self.images.append(FilterImage(title: effect, backgroundImage: nil))
+				}
+				self.collectionView?.reloadData()
+			}
 		})
 	}
 	
@@ -315,6 +334,8 @@ extension InspirationsViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InspirationCell", for: indexPath) as! InspirationCell
         cell.inspiration = images[indexPath.item]
 		if cell.inspiration?.backgroundImage == nil {
+			
+			guard let showingPhoto = self.showingPhoto else { return cell }
 			backgroundQueue.addOperation(){
 				if #available(iOS 11.0, *) {
 					self.images[indexPath.item] = FilterImage(title: (cell.inspiration?.title)!, backgroundImage: self.convert(cmage: self.showingPhoto.applyingFilter((cell.inspiration?.title)!)))
