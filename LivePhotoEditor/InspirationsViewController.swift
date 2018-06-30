@@ -190,7 +190,13 @@ class InspirationsViewController: UICollectionViewController {
 			output.adjustmentData = adjustmentData
 			
 			// Create PHLivePhotoEditingContext from PHContentEditingInput
-			guard let livePhotoContext = PHLivePhotoEditingContext(livePhotoEditingInput: input) else { fatalError("can't get live photo to edit") }
+			guard let livePhotoContext = PHLivePhotoEditingContext(livePhotoEditingInput: input) else {
+//				fatalError("can't get live photo to edit")
+				// not live
+				
+				
+				return
+			}
 			
 			// Set frameProcessor
 			livePhotoContext.frameProcessor = { frame, _ in
@@ -210,6 +216,42 @@ class InspirationsViewController: UICollectionViewController {
 						}
 					})
 				} else {
+					let url = input.fullSizeImageURL
+					// Generate rendered JPEG data
+					if let path = url?.path {
+						var image = UIImage(contentsOfFile: path)!
+						if #available(iOS 11.0, *) {
+							let ciimage = CIImage(image: image)?.applyingFilter(filterName)
+							let renderedJPEGData = UIImageJPEGRepresentation(self.convert(cmage: ciimage!), 0.9)
+							// Save JPEG data
+							var error: NSError?
+							//						fatalError("can't get live photo to edit4")
+							let success = try! renderedJPEGData?.write(to: output.renderedContentURL)
+							if (success != nil) {
+								//							fatalError("can't get live photo to edit2")
+								PHPhotoLibrary.shared().performChanges({
+									//								fatalError("can't get live photo to edit3")
+									let request = PHAssetChangeRequest(for: asset)
+									request.contentEditingOutput = output
+								}, completionHandler: { success, error in
+									if !success {
+										print(Date(), #function, #line, "cannot edit asset: \(error)")
+									}
+								})
+							} else {
+								print("An error occured: \(error?.description)")
+								
+							}
+						} else {
+							// Fallback on earlier versions
+						}
+						
+						
+					}
+					// Call completion handler to commit edit to Photos.
+					
+					// Clean up temporary files, etc.
+					
 					print(Date(), #function, #line, "cannot output live photo")
 				}
 			}
