@@ -15,8 +15,10 @@ class InspirationCell: UICollectionViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var timeAndRoomLabel: UILabel!
     @IBOutlet private weak var speakerLabel: UILabel!
-    
-    var inspiration:FilterImage?{
+	@IBOutlet weak var roundedView: UIView!
+	
+	@IBOutlet weak var allView: UIView!
+	var inspiration:FilterImage?{
         didSet{
             if let inspiration = inspiration{
                 imageView.image = inspiration.backgroundImage
@@ -37,9 +39,10 @@ class InspirationCell: UICollectionViewCell {
         // 3
         let minAlpha: CGFloat = 0.3
         let maxAlpha: CGFloat = 0.75
-        imageCoverView.alpha = maxAlpha - (delta * (maxAlpha - minAlpha))
+        imageCoverView.alpha = 0.2 - (delta * (0.2 - 0.01))
         timeAndRoomLabel.alpha = delta
         speakerLabel.alpha = delta
+		titleLabel.alpha = maxAlpha - ( (1.0 - delta) * (maxAlpha - minAlpha))
     }
 }
 

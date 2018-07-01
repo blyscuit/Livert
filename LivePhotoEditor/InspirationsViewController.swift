@@ -24,7 +24,7 @@ class InspirationsViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		backgroundQueue.maxConcurrentOperationCount = 1
+		backgroundQueue.maxConcurrentOperationCount = 2
 		PHPhotoLibrary.shared().register(self)
         if let patternImage = UIImage(named: "Pattern") {
             view.backgroundColor = UIColor(patternImage: patternImage)
@@ -224,13 +224,12 @@ class InspirationsViewController: UICollectionViewController {
 							let ciimage = CIImage(image: image)?.applyingFilter(filterName)
 							let renderedJPEGData = UIImageJPEGRepresentation(self.convert(cmage: ciimage!), 0.9)
 							// Save JPEG data
-							var error: NSError?
-							//						fatalError("can't get live photo to edit4")
-							let success = try! renderedJPEGData?.write(to: output.renderedContentURL)
-							if (success != nil) {
-								//							fatalError("can't get live photo to edit2")
+							
+							
+							if let success = try? renderedJPEGData?.write(to: output.renderedContentURL) {
+								
 								PHPhotoLibrary.shared().performChanges({
-									//								fatalError("can't get live photo to edit3")
+									
 									let request = PHAssetChangeRequest(for: asset)
 									request.contentEditingOutput = output
 								}, completionHandler: { success, error in
@@ -239,7 +238,6 @@ class InspirationsViewController: UICollectionViewController {
 									}
 								})
 							} else {
-								print("An error occured: \(error?.description)")
 								
 							}
 						} else {
