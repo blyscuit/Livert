@@ -209,18 +209,22 @@
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="6"/>
+                                                            <integer key="value" value="20"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="bg3-Xs-h0D" firstAttribute="leading" secondItem="rOi-VT-KSs" secondAttribute="leading" id="Iw8-M7-qJ3"/>
                                                 <constraint firstAttribute="bottom" secondItem="bg3-Xs-h0D" secondAttribute="bottom" id="Ol7-ev-8gF"/>
                                                 <constraint firstAttribute="trailing" secondItem="bg3-Xs-h0D" secondAttribute="trailing" id="VkR-mP-6nB"/>
                                                 <constraint firstItem="bg3-Xs-h0D" firstAttribute="top" secondItem="rOi-VT-KSs" secondAttribute="top" id="s3V-pz-XFR"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="20"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
                                 </view>
@@ -254,10 +258,31 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="ewo-pY-hGN" kind="presentation" identifier="modal" id="mOU-zF-AQH"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mmh-XV-xJY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1650" y="37"/>
+            <point key="canvasLocation" x="1602" y="45"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="J8f-FC-G01">
+            <objects>
+                <viewController id="ewo-pY-hGN" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="n1k-Ws-PEl"/>
+                        <viewControllerLayoutGuide type="bottom" id="XXz-cH-C3a"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cy7-AU-bvl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eEa-Um-NoS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2390" y="45"/>
         </scene>
     </scenes>
 </document>

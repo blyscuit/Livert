@@ -13,7 +13,7 @@ import UIKit
 struct UltravisualLayoutConstants {
     struct Cell {
         /* The height of the non-featured cell */
-        static let standardHeight: CGFloat = 100
+        static let standardHeight: CGFloat = 120
         /* The height of the first visible cell */
         static let featuredHeight: CGFloat = 340
     }
@@ -27,7 +27,7 @@ class UltravisualLayout:UICollectionViewLayout{
 	let dragOffset: CGFloat = 180.0
 	
 	let positionOffset: CGFloat = UltravisualLayoutConstants.Cell.standardHeight
-	let highlightPositionIndex: CGFloat = 3.0
+	let highlightPositionIndex: CGFloat = 2.0
     
     var cache = [UICollectionViewLayoutAttributes]()
     

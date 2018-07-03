@@ -26,6 +26,13 @@ class InspirationCell: UICollectionViewCell {
             }
         }
     }
+	override func didMoveToSuperview() {
+		super.didMoveToSuperview()
+		
+		self.allView.layer.shadowRadius = 4
+		self.allView.layer.shadowOpacity = 0.2
+		self.allView.layer.shadowColor = UIColor.gray.cgColor
+	}
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
         

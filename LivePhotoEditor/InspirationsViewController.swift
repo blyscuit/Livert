@@ -373,6 +373,8 @@ extension InspirationsViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InspirationCell", for: indexPath) as! InspirationCell
         cell.inspiration = images[indexPath.item]
+		print(collectionView.backgroundColor)
+		cell.allView.backgroundColor = collectionView.backgroundColor
 		if cell.inspiration?.backgroundImage == nil {
 			
 			guard let showingPhoto = self.showingPhoto else { return cell }
