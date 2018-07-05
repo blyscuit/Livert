@@ -11,7 +11,7 @@ internal class DetailViewController: UIViewController {
     
     var blurView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight ))
     var detailView: UIView?
-    var scrollView = UIScrollView()
+    var scrollView = GesturedScrollView()
     var originalFrame = CGRect.zero
     var snap = UIView()
     var card: Card!
@@ -19,6 +19,9 @@ internal class DetailViewController: UIViewController {
     var isFullscreen = false
     
     fileprivate var xButton = XButton()
+    
+    fileprivate var edgePan: UIScreenEdgePanGestureRecognizer!
+    fileprivate var topPan: UIPanGestureRecognizer!
     
     override var prefersStatusBarHidden: Bool {
         if isFullscreen { return true }
@@ -56,6 +59,16 @@ internal class DetailViewController: UIViewController {
         scrollView.showsHorizontalScrollIndicator = false
         
         xButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+        
+        edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped))
+        edgePan.edges = .left
+        scrollView.addGestureRecognizer(edgePan)
+        
+        topPan = UIPanGestureRecognizer(target: self, action: #selector(screenTopPan))
+        topPan.delegate = self
+        card.backgroundIV.addGestureRecognizer(topPan)
+        
+        
         blurView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissVC)))
         xButton.isUserInteractionEnabled = true
         view.isUserInteractionEnabled = true
@@ -129,7 +142,6 @@ internal class DetailViewController: UIViewController {
            
             scrollView.frame = view.bounds
             scrollView.frame.origin.y = 0
-            print(scrollView.frame)
             
         } else {
             scrollView.frame.size = CGSize(width: LayoutHelper.XScreen(85), height: LayoutHelper.YScreen(100) - 20)
@@ -148,6 +160,61 @@ internal class DetailViewController: UIViewController {
     
     
     //MARK: - Actions
+    @objc func screenEdgeSwiped(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+        let outline = recognizer.translation(in: view)
+        scrollViewSizeDrag(outline: outline.x)
+        if recognizer.state == .recognized {
+            resetScrollViewSize()
+        }
+    }
+    
+    @objc func screenTopPan(_ recognizer: UIPanGestureRecognizer) {
+        if scrollView.contentOffset.y > 0 { return }
+        let outline = recognizer.translation(in: view)
+        scrollViewSizeDrag(outline: outline.y)
+        if recognizer.state == .recognized {
+            resetScrollViewSize()
+        }
+    }
+    
+    func scrollViewSizeDrag(outline: CGFloat) {
+        let dragThreadhold = view.frame.size.width * 2/5
+        let ratio = outline > 0 ? 0.7 + 0.3 * (dragThreadhold - outline) / dragThreadhold : 1
+        
+        if self.isFullscreen {
+            
+            scrollView.frame.size = CGSize(width: self.view.bounds.width * ratio, height: self.view.bounds.height * ratio)
+            scrollView.layer.cornerRadius = card.cardRadius * (1 - ratio)
+            scrollView.center = self.blurView.center
+            
+            
+        } else {
+            scrollView.frame.size = CGSize(width: LayoutHelper.XScreen(85) * ratio, height: LayoutHelper.YScreen(100) * ratio - 20)
+            scrollView.center = self.blurView.center
+            
+        }
+        
+        let y = scrollView.contentOffset.y
+        xButton.alpha = (y - (card.backgroundIV.bounds.height * 0.6)) * ratio
+        
+        if outline > dragThreadhold {
+            dismissVC()
+        }
+    }
+    
+    func resetScrollViewSize() {
+        UIView.animate(withDuration: 0.3) {
+            if self.isFullscreen {
+                self.scrollView.frame.size = CGSize(width: self.view.bounds.width, height: self.view.bounds.height)
+                self.scrollView.sizeToFit()
+                self.scrollView.layer.cornerRadius = 0
+                self.scrollView.center = self.blurView.center
+            } else {
+                self.scrollView.frame.size = CGSize(width: LayoutHelper.XScreen(85), height: LayoutHelper.YScreen(100) - 20)
+                self.scrollView.center = self.blurView.center
+            }
+        }
+    }
     
     @objc func dismissVC(){
         scrollView.contentOffset.y = 0
@@ -163,37 +230,37 @@ extension DetailViewController: UIScrollViewDelegate {
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let y = scrollView.contentOffset.y
-        let origin = originalFrame.origin.y
-        let currentOrigin = originalFrame.origin.y
+//        let origin = originalFrame.origin.y
+//        let currentOrigin = originalFrame.origin.y
         
         xButton.alpha = y - (card.backgroundIV.bounds.height * 0.6)
         
-        if (y<0  || currentOrigin > origin) {
-            scrollView.frame.origin.y -= y/2
-            
-            scrollView.contentOffset.y = 0
-        }
-        
+//        if (y<0  || currentOrigin > origin) {
+//            scrollView.frame.origin.y -= y/2
+//
+//            scrollView.contentOffset.y = 0
+//        }
+        scrollViewSizeDrag(outline: -y)
         card.delegate?.cardDetailIsScrolling?(card: card)
     }
     
-    public func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        
-        let origin = originalFrame.origin.y
-        let currentOrigin = scrollView.frame.origin.y
-        let max = 4.0
-        let min = 2.0
-        var speed = Double(-velocity.y)
-        
-        if speed > max { speed = max }
-        if speed < min { speed = min }
-        
-        //self.bounceIntensity = CGFloat(speed-1)
-        speed = (max/speed*min)/10
-        
-        guard (currentOrigin - origin) < 60 else { dismiss(animated: true, completion: nil); return }
-        UIView.animate(withDuration: speed) { scrollView.frame.origin.y = self.originalFrame.origin.y }
-    }
+//    public func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//
+//        let origin = originalFrame.origin.y
+//        let currentOrigin = scrollView.frame.origin.y
+//        let max = 4.0
+//        let min = 2.0
+//        var speed = Double(-velocity.y)
+//
+//        if speed > max { speed = max }
+//        if speed < min { speed = min }
+//
+//        //self.bounceIntensity = CGFloat(speed-1)
+//        speed = (max/speed*min)/10
+//
+////        guard (currentOrigin - origin) < 60 else { dismiss(animated: true, completion: nil); return }
+////        UIView.animate(withDuration: speed) { scrollView.frame.origin.y = self.originalFrame.origin.y }
+//    }
     
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
@@ -202,6 +269,16 @@ extension DetailViewController: UIScrollViewDelegate {
     
 }
 
+extension DetailViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == self.topPan && otherGestureRecognizer == self.edgePan { return true }
+        return false
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
+}
 class XButton: UIButton {
     
     private let circle = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
@@ -251,7 +328,14 @@ class XButton: UIButton {
     
 }
 
-
+class GesturedScrollView: UIScrollView, UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        print(otherGestureRecognizer)
+//        if otherGestureRecognizer.state == .began { return true }
+        return false
+    }
+    
+}
 
 
 
