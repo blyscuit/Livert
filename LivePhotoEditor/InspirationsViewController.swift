@@ -23,16 +23,21 @@ class InspirationsViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-		
-		backgroundQueue.maxConcurrentOperationCount = 2
+		backgroundQueue.maxConcurrentOperationCount = 3
 		PHPhotoLibrary.shared().register(self)
-        if let patternImage = UIImage(named: "Pattern") {
-            view.backgroundColor = UIColor(patternImage: patternImage)
-        }
-        collectionView!.backgroundColor = UIColor.clear
-        collectionView!.decelerationRate = UIScrollViewDecelerationRateFast
+		
+        collectionView?.backgroundColor = UIColor(rgb: 0x1B1C1D)
+//        collectionView?.decelerationRate = UIScrollViewDecelerationRateFast
+		collectionView?.collectionViewLayout = UICollectionViewFlowLayout()
+		
     }
-
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
+		guard let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else {
+			return
+		}
+		flowLayout.invalidateLayout()
+	}
 	// MARK: - Properties
 	
 	@IBOutlet weak var livePhotoView: PHLivePhotoView!
@@ -70,7 +75,7 @@ class InspirationsViewController: UICollectionViewController {
 	
 	// MARK: - Private
 	
-	private func showImagePicker() {
+	fileprivate func showImagePicker() {
 		let controller = UIImagePickerController()
 		controller.delegate = self
 		controller.sourceType = .photoLibrary
@@ -114,9 +119,25 @@ class InspirationsViewController: UICollectionViewController {
 			if let livePhoto = livePhoto {
 				self.images.removeAll()
 				
+				self.backgroundQueue.cancelAllOperations()
+				
 				self.showingPhoto = CIImage(image: livePhoto)
-				for effect in self.effectList {
+				for (index, effect) in self.effectList.enumerated() {
 					self.images.append(FilterImage(title: effect, backgroundImage: nil))
+					
+					self.backgroundQueue.addOperation(){
+							if #available(iOS 11.0, *) {
+								self.images[index] = FilterImage(title: effect, backgroundImage: InspirationsViewController.convert(cmage: self.showingPhoto.applyingFilter(effect)))
+							} else {
+								// Fallback on earlier versions
+							}
+							
+							DispatchQueue.main.sync {
+								self.collectionView?.reloadItems(at: [IndexPath(item: index, section: 0)])
+//													self.collectionView?.reloadData()
+							}
+						}
+					
 				}
 				self.collectionView?.reloadData()
 			}
@@ -161,100 +182,7 @@ class InspirationsViewController: UICollectionViewController {
 		})
 	}
 	
-	fileprivate func applyFilter(_ filterName: String) {
-		guard let asset = self.asset else { return }
-		
-		let formatIdentifier = Bundle.main.bundleIdentifier!
-		let formatVersion = "1.0"
-		
-		// Set up a handler to make sure we can handle prior edits.
-		let options = PHContentEditingInputRequestOptions()
-		options.canHandleAdjustmentData = { adjustmentData in
-			return adjustmentData.formatIdentifier == formatIdentifier && adjustmentData.formatVersion == formatVersion
-		}
-		
-		// Check whether the asset supports the content editing operation
-		if !asset.canPerform(.content) { return }
-		
-		// Request PHContentEditingInput
-		asset.requestContentEditingInput(with: options, completionHandler: { input, info in
-			guard let input = input else { fatalError("can't get content editing input: \(info)") }
-			
-			// Create PHAdjustmentData
-			let adjustmentData = PHAdjustmentData(formatIdentifier: formatIdentifier,
-												  formatVersion: formatVersion,
-												  data: filterName.data(using: .utf8)!)
-			
-			// Create PHContentEditingOutput and set PHAdjustmentData
-			let output = PHContentEditingOutput(contentEditingInput: input)
-			output.adjustmentData = adjustmentData
-			
-			// Create PHLivePhotoEditingContext from PHContentEditingInput
-			guard let livePhotoContext = PHLivePhotoEditingContext(livePhotoEditingInput: input) else {
-//				fatalError("can't get live photo to edit")
-				// not live
-				
-				
-				return
-			}
-			
-			// Set frameProcessor
-			livePhotoContext.frameProcessor = { frame, _ in
-				return frame.image.applyingFilter(filterName, withInputParameters: nil)
-			}
-			
-			// Perform saveLivePhoto
-			livePhotoContext.saveLivePhoto(to: output) { success, error in
-				if success {
-					// Commit the edit to the Photos library.
-					PHPhotoLibrary.shared().performChanges({
-						let request = PHAssetChangeRequest(for: asset)
-						request.contentEditingOutput = output
-					}, completionHandler: { success, error in
-						if !success {
-							print(Date(), #function, #line, "cannot edit asset: \(error)")
-						}
-					})
-				} else {
-					let url = input.fullSizeImageURL
-					// Generate rendered JPEG data
-					if let path = url?.path {
-						var image = UIImage(contentsOfFile: path)!
-						if #available(iOS 11.0, *) {
-							let ciimage = CIImage(image: image)?.applyingFilter(filterName)
-							let renderedJPEGData = UIImageJPEGRepresentation(self.convert(cmage: ciimage!), 0.9)
-							// Save JPEG data
-							
-							
-							if let success = try? renderedJPEGData?.write(to: output.renderedContentURL) {
-								
-								PHPhotoLibrary.shared().performChanges({
-									
-									let request = PHAssetChangeRequest(for: asset)
-									request.contentEditingOutput = output
-								}, completionHandler: { success, error in
-									if !success {
-										print(Date(), #function, #line, "cannot edit asset: \(error)")
-									}
-								})
-							} else {
-								
-							}
-						} else {
-							// Fallback on earlier versions
-						}
-						
-						
-					}
-					// Call completion handler to commit edit to Photos.
-					
-					// Clean up temporary files, etc.
-					
-					print(Date(), #function, #line, "cannot output live photo")
-				}
-			}
-		})
-	}
+	
 	
 	fileprivate func applyFilterPreview(_ filterName: String) {
 		guard let asset = self.asset else { return }
@@ -298,7 +226,7 @@ class InspirationsViewController: UICollectionViewController {
 		})
 	}
 	
-	func convert(cmage:CIImage) -> UIImage
+	static func convert(cmage:CIImage) -> UIImage
 	{
 		let context:CIContext = CIContext.init(options: nil)
 		let cgImage:CGImage = context.createCGImage(cmage, from: cmage.extent)!
@@ -368,39 +296,73 @@ extension InspirationsViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+		return (showingPhoto != nil) ? images.count : 1
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InspirationCell", for: indexPath) as! InspirationCell
-        cell.inspiration = images[indexPath.item]
-		print(collectionView.backgroundColor)
-		cell.allView.backgroundColor = collectionView.backgroundColor
-		if cell.inspiration?.backgroundImage == nil {
+		if indexPath.row < images.count {
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as! CardCell
+			let detailVC = storyboard?.instantiateViewController(withIdentifier: "CardContent") as? CardContentViewController
+			detailVC?.view.backgroundColor = collectionView.backgroundColor
+			detailVC?.asset = self.asset
+			detailVC?.filterName = images[indexPath.item].title
 			
-			guard let showingPhoto = self.showingPhoto else { return cell }
-			backgroundQueue.addOperation(){
-				if #available(iOS 11.0, *) {
-					self.images[indexPath.item] = FilterImage(title: (cell.inspiration?.title)!, backgroundImage: self.convert(cmage: self.showingPhoto.applyingFilter((cell.inspiration?.title)!)))
-				} else {
-					// Fallback on earlier versions
-				}
-				
-				DispatchQueue.main.sync {
-//					self.collectionView?.reloadData()
-				}
+			cell.imageView.shouldPresent(detailVC, from: self, fullscreen: true)
+			cell.inspiration = images[indexPath.item]
+			cell.imageView.backgroundColor = collectionView.backgroundColor
+			return cell
+		} else {
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmptyCell", for: indexPath) as! ButtonCell
+			cell.loadTapped = { [unowned self] (buttonCell) -> Void in
+				self.showImagePicker()
 			}
+			return cell
 		}
-        return cell
+		
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let layout = collectionViewLayout as! UltravisualLayout
-        let offset = layout.dragOffset * CGFloat(indexPath.item)
-        if collectionView.contentOffset.y != offset - layout.positionOffset * layout.highlightPositionIndex {
-			print(offset - layout.positionOffset * layout.highlightPositionIndex)
-            collectionView.setContentOffset(CGPoint(x: 0, y: offset - layout.positionOffset * layout.highlightPositionIndex), animated: true)
-		} else {
-			self.applyFilter(effectList[indexPath.item])
-		}
+//        let layout = collectionViewLayout as! UltravisualLayout
+//        let offset = layout.dragOffset * CGFloat(indexPath.item)
+//        if collectionView.contentOffset.y != offset - layout.positionOffset * layout.highlightPositionIndex {
+//			print(offset - layout.positionOffset * layout.highlightPositionIndex)
+//            collectionView.setContentOffset(CGPoint(x: 0, y: offset - layout.positionOffset * layout.highlightPositionIndex), animated: true)
+//		} else {
+////			self.applyFilter(effectList[indexPath.item])
+//		}
     }
+	
+	
+}
+
+extension InspirationsViewController: UICollectionViewDelegateFlowLayout {
+	func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt: IndexPath) -> CGSize {
+		return CGSize(width: self.view.frame.size.width - 48, height: (self.view.frame.size.width - 48) * 5/4)
+	}
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+		return 20
+	}
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+		return 20
+	}
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+		return UIEdgeInsets(top: 20, left: 24, bottom: 20, right: 24)
+	}
+}
+
+extension UIColor {
+	convenience init(red: Int, green: Int, blue: Int) {
+		assert(red >= 0 && red <= 255, "Invalid red component")
+		assert(green >= 0 && green <= 255, "Invalid green component")
+		assert(blue >= 0 && blue <= 255, "Invalid blue component")
+		
+		self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+	}
+	
+	convenience init(rgb: Int) {
+		self.init(
+			red: (rgb >> 16) & 0xFF,
+			green: (rgb >> 8) & 0xFF,
+			blue: rgb & 0xFF
+		)
+	}
 }

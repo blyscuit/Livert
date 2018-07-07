@@ -79,7 +79,8 @@ import UIKit
         
         subtitleLbl.text = subtitle.uppercased()
         subtitleLbl.textColor = textColor
-        subtitleLbl.font = UIFont.systemFont(ofSize: subtitleSize, weight: .semibold)
+
+        subtitleLbl.font = UIFont.systemFont(ofSize: subtitleSize, weight: UIFontWeightSemibold)
         subtitleLbl.adjustsFontSizeToFitWidth = true
         subtitleLbl.minimumScaleFactor = 0.1
         subtitleLbl.lineBreakMode = .byTruncatingTail
@@ -87,7 +88,7 @@ import UIKit
         
         titleLbl.textColor = textColor
         titleLbl.text = title
-        titleLbl.font = UIFont.systemFont(ofSize: titleSize, weight: .bold)
+        titleLbl.font = UIFont.systemFont(ofSize: titleSize, weight: UIFontWeightBold)
         titleLbl.adjustsFontSizeToFitWidth = true
         titleLbl.minimumScaleFactor = 0.1
         titleLbl.lineBreakMode = .byTruncatingTail

@@ -23,8 +23,6 @@ import UIKit
     @objc optional func cardDetailIsScrolling(card: Card)
     
     @objc optional func cardHighlightDidTapButton(card: CardHighlight, button: UIButton)
-    @objc optional func cardPlayerDidPlay(card: CardPlayer)
-    @objc optional func cardPlayerDidPause(card: CardPlayer)
 }
 
 @IBDesignable open class Card: UIView, CardDelegate {
@@ -202,7 +200,7 @@ import UIKit
     
     //MARK: - Animations
     
-    private func pushBackAnimated() {
+    fileprivate func pushBackAnimated() {
         
         UIView.animate(withDuration: 0.2, animations: { self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95) })
     }
@@ -272,7 +270,7 @@ extension UILabel {
         let attributedString = NSMutableAttributedString(string: self.text!)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = height
-        attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
         self.attributedText = attributedString
     }
     

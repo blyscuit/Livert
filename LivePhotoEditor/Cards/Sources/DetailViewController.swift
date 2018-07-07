@@ -9,7 +9,7 @@ import UIKit
 
 internal class DetailViewController: UIViewController {
     
-    var blurView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight ))
+    var blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark ))
     var detailView: UIView?
     var scrollView = GesturedScrollView()
     var originalFrame = CGRect.zero
@@ -55,7 +55,8 @@ internal class DetailViewController: UIViewController {
         
         scrollView.delegate = self
         scrollView.alwaysBounceVertical = true
-        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = true
+		scrollView.indicatorStyle = .white
         scrollView.showsHorizontalScrollIndicator = false
         
         xButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
@@ -155,8 +156,11 @@ internal class DetailViewController: UIViewController {
         scrollView.frame = scrollView.frame.applying(transform)
         
         card.backgroundIV.frame.origin = scrollView.bounds.origin
-        card.backgroundIV.frame.size = CGSize( width: scrollView.bounds.width,
-                                               height: card.backgroundIV.bounds.height)
+		var aspectRatio: CGFloat =  (card.backgroundImage != nil) ? card.backgroundImage!.size.width / card.backgroundImage!.size.height : 1
+		let width = scrollView.bounds.width
+		let height = aspectRatio > 1.0 ? card.backgroundIV.bounds.height : width / aspectRatio
+        card.backgroundIV.frame.size = CGSize( width: width,
+                                               height: height)
         card.layout(animating: isAnimating)
         
     }

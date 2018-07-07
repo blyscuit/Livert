@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -136,14 +138,14 @@
         <!--Inspirations View Controller-->
         <scene sceneID="XEj-Zw-eWd">
             <objects>
-                <collectionViewController id="0Bh-pT-81Z" customClass="InspirationsViewController" customModule="ExpandingCollectionView" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" id="5MG-Xs-0TM">
+                <collectionViewController id="0Bh-pT-81Z" customClass="InspirationsViewController" customModule="LivePhotoEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" prefetchingEnabled="NO" id="5MG-Xs-0TM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewLayout key="collectionViewLayout" id="Lkp-Hg-mVr" customClass="UltravisualLayout" customModule="ExpandingCollectionView" customModuleProvider="target"/>
+                        <collectionViewLayout key="collectionViewLayout" id="Lkp-Hg-mVr" customClass="UltravisualLayout" customModule="LivePhotoEditor" customModuleProvider="target"/>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InspirationCell" id="zmP-ge-xmP" customClass="InspirationCell" customModule="ExpandingCollectionView" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InspirationCell" id="zmP-ge-xmP" customClass="InspirationCell" customModule="LivePhotoEditor" customModuleProvider="target">
                                 <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -245,6 +247,89 @@
                                     <outlet property="titleLabel" destination="Mgl-nQ-ENv" id="QjK-2u-15C"/>
                                 </connections>
                             </collectionViewCell>
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CardCell" id="9TS-BO-yep" customClass="CardCell" customModule="LivePhotoEditor" customModuleProvider="target">
+                                <rect key="frame" x="87.5" y="210" width="200" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RRw-ho-hQc">
+                                            <rect key="frame" x="0.0" y="10" width="200" height="180"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lju-L1-Qfj">
+                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="180"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rgw-AW-CbO" customClass="CardArticle" customModule="LivePhotoEditor" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="180"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                                    <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="0.80297517123287676" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="title" value=" "/>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="subtitle" value=" "/>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                                    <real key="value" value="0.10000000000000001"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="category" value=" "/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="Rgw-AW-CbO" secondAttribute="bottom" id="72S-sL-fKd"/>
+                                                        <constraint firstItem="Rgw-AW-CbO" firstAttribute="leading" secondItem="Lju-L1-Qfj" secondAttribute="leading" id="9Eh-KC-h6R"/>
+                                                        <constraint firstItem="Rgw-AW-CbO" firstAttribute="top" secondItem="Lju-L1-Qfj" secondAttribute="top" id="m4B-2i-0Pt"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Rgw-AW-CbO" secondAttribute="trailing" id="won-gO-Vyx"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Lju-L1-Qfj" secondAttribute="bottom" id="HPQ-OD-ahc"/>
+                                                <constraint firstItem="Lju-L1-Qfj" firstAttribute="leading" secondItem="RRw-ho-hQc" secondAttribute="leading" id="Tz6-dZ-jC6"/>
+                                                <constraint firstAttribute="trailing" secondItem="Lju-L1-Qfj" secondAttribute="trailing" id="aZv-qT-rg5"/>
+                                                <constraint firstItem="Lju-L1-Qfj" firstAttribute="top" secondItem="RRw-ho-hQc" secondAttribute="top" id="hIm-u6-LUy"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="RRw-ho-hQc" secondAttribute="trailing" id="53l-EB-oFh"/>
+                                    <constraint firstItem="RRw-ho-hQc" firstAttribute="top" secondItem="9TS-BO-yep" secondAttribute="top" constant="10" id="H1t-bP-zKE"/>
+                                    <constraint firstItem="RRw-ho-hQc" firstAttribute="leading" secondItem="9TS-BO-yep" secondAttribute="leading" id="jE7-rj-sLq"/>
+                                    <constraint firstAttribute="bottom" secondItem="RRw-ho-hQc" secondAttribute="bottom" constant="10" id="uoZ-00-1hl"/>
+                                </constraints>
+                                <size key="customSize" width="200" height="200"/>
+                                <connections>
+                                    <outlet property="imageView" destination="Rgw-AW-CbO" id="0pT-xU-Qrk"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EmptyCell" id="qoX-se-c1p" customClass="ButtonCell" customModule="LivePhotoEditor" customModuleProvider="target">
+                                <rect key="frame" x="87.5" y="420" width="200" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5wS-Vm-dTK">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="5wS-Vm-dTK" secondAttribute="height" multiplier="1:1" id="Qca-KO-WFS"/>
+                                            </constraints>
+                                            <state key="normal" image="Flower"/>
+                                            <connections>
+                                                <action selector="loadPress:" destination="qoX-se-c1p" eventType="touchUpInside" id="eUE-iu-a7X"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="5wS-Vm-dTK" firstAttribute="centerY" secondItem="qoX-se-c1p" secondAttribute="centerY" id="DGT-9L-g2s"/>
+                                    <constraint firstAttribute="trailing" secondItem="5wS-Vm-dTK" secondAttribute="trailing" id="K7g-wb-Gcg"/>
+                                    <constraint firstItem="5wS-Vm-dTK" firstAttribute="leading" secondItem="qoX-se-c1p" secondAttribute="leading" id="wQb-Vy-xbZ"/>
+                                </constraints>
+                                <size key="customSize" width="200" height="200"/>
+                            </collectionViewCell>
                         </cells>
                         <connections>
                             <outlet property="dataSource" destination="0Bh-pT-81Z" id="7SQ-39-pSs"/>
@@ -253,6 +338,7 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="7kX-Fa-9zK">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="frf-kt-pUE">
+                            <color key="tintColor" white="0.94729275170000005" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="addButtonDidTouch:" destination="0Bh-pT-81Z" id="NKT-OT-CK9"/>
                             </connections>
@@ -284,5 +370,50 @@
             </objects>
             <point key="canvasLocation" x="2390" y="45"/>
         </scene>
+        <!--Card Content View Controller-->
+        <scene sceneID="i5G-0x-pTt">
+            <objects>
+                <viewController storyboardIdentifier="CardContent" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VAg-cL-iBv" customClass="CardContentViewController" customModule="LivePhotoEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="y5C-d8-nQI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8U-wN-Y73">
+                                <rect key="frame" x="113" y="80" width="150" height="44"/>
+                                <color key="backgroundColor" red="0.054901960784313725" green="0.066666666666666666" blue="0.027450980392156862" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="HWc-vd-fOm"/>
+                                    <constraint firstAttribute="width" constant="150" id="QzU-pR-dNf"/>
+                                </constraints>
+                                <color key="tintColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="  Save" image="download"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="doMagic:" destination="VAg-cL-iBv" eventType="touchUpInside" id="2zg-XE-UU2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.10588235294117647" green="0.10980392156862745" blue="0.11372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Y8U-wN-Y73" firstAttribute="centerX" secondItem="bkC-PD-feM" secondAttribute="centerX" id="aOn-lW-8gs"/>
+                            <constraint firstItem="Y8U-wN-Y73" firstAttribute="top" secondItem="bkC-PD-feM" secondAttribute="top" constant="60" id="h3z-lc-PZO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bkC-PD-feM"/>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4qc-BA-1HV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2007" y="731"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="Flower" width="274" height="275"/>
+        <image name="download" width="21" height="28"/>
+    </resources>
 </document>
