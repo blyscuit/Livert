@@ -95,9 +95,13 @@ import UIKit
      */
     public func shouldPresent( _ contentViewController: UIViewController?, from superVC: UIViewController?, fullscreen: Bool = false) {
         if let content = contentViewController {
+			content.willMove(toParentViewController: nil)
+			content.removeFromParentViewController()
             self.superVC = superVC
-			if detailVC.childViewControllers.count > 0 { detailVC.childViewControllers.first?.removeFromParentViewController() }
+			if detailVC.childViewControllers.count > 0 { fatalError("diediedie");}// return; detailVC.childViewControllers.first?.removeFromParentViewController() }
             detailVC.addChildViewController(content)
+			content.didMove(toParentViewController: detailVC)
+			if detailVC.childViewControllers.count <= 0 { fatalError("diediedie2");}
             detailVC.detailView = content.view
             detailVC.card = self
             detailVC.delegate = self.delegate

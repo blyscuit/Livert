@@ -304,6 +304,8 @@ extension InspirationsViewController {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as! CardCell
 			cell.imageView.delegate = self
 			
+//			cell.imageView.shouldPresent(detailVC, from: self, fullscreen: true)
+			
 			cell.inspiration = images[indexPath.item]
 			cell.imageView.backgroundColor = collectionView.backgroundColor
 			return cell
@@ -347,7 +349,7 @@ extension InspirationsViewController: CardDelegate {
 		navigationController?.setNavigationBarHidden(false, animated: true)
 	}
 	func cardDidCloseDetailView(card: Card) {
-		detailVC = storyboard?.instantiateViewController(withIdentifier: "CardContent") as? CardContentViewController
+//		detailVC = storyboard?.instantiateViewController(withIdentifier: "CardContent") as? CardContentViewController
 	}
 }
 
