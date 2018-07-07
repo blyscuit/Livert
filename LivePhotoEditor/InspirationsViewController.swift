@@ -16,6 +16,7 @@ private let reuseIdentifier = "Cell"
 class InspirationsViewController: UICollectionViewController {
 
 	
+	var detailVC: CardContentViewController?
 	let backgroundQueue = OperationQueue()
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
@@ -29,7 +30,7 @@ class InspirationsViewController: UICollectionViewController {
         collectionView?.backgroundColor = UIColor(rgb: 0x1B1C1D)
 //        collectionView?.decelerationRate = UIScrollViewDecelerationRateFast
 		collectionView?.collectionViewLayout = UICollectionViewFlowLayout()
-		
+		detailVC = storyboard?.instantiateViewController(withIdentifier: "CardContent") as? CardContentViewController
     }
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 		super.viewWillTransition(to: size, with: coordinator)
@@ -301,12 +302,8 @@ extension InspirationsViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		if indexPath.row < images.count {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as! CardCell
-			let detailVC = storyboard?.instantiateViewController(withIdentifier: "CardContent") as? CardContentViewController
-			detailVC?.view.backgroundColor = collectionView.backgroundColor
-			detailVC?.asset = self.asset
-			detailVC?.filterName = images[indexPath.item].title
+			cell.imageView.delegate = self
 			
-			cell.imageView.shouldPresent(detailVC, from: self, fullscreen: true)
 			cell.inspiration = images[indexPath.item]
 			cell.imageView.backgroundColor = collectionView.backgroundColor
 			return cell
@@ -334,6 +331,26 @@ extension InspirationsViewController {
 	
 }
 
+extension InspirationsViewController: CardDelegate {
+	func cardDidTapInside(card: Card) {
+		detailVC!.asset = self.asset
+		detailVC!.view.backgroundColor = UIColor.clear// collectionView.backgroundColor
+		if let card = card as? CardArticle {
+			detailVC!.filterName = card.category
+		}
+		card.shouldPresent(detailVC, from: self, fullscreen: true)
+	}
+	func cardWillShowDetailView(card: Card) {
+		navigationController?.setNavigationBarHidden(true, animated: true)
+	}
+	func cardWillCloseDetailView(card: Card) {
+		navigationController?.setNavigationBarHidden(false, animated: true)
+	}
+	func cardDidCloseDetailView(card: Card) {
+		detailVC = storyboard?.instantiateViewController(withIdentifier: "CardContent") as? CardContentViewController
+	}
+}
+
 extension InspirationsViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt: IndexPath) -> CGSize {
 		return CGSize(width: self.view.frame.size.width - 48, height: (self.view.frame.size.width - 48) * 5/4)
@@ -346,23 +363,5 @@ extension InspirationsViewController: UICollectionViewDelegateFlowLayout {
 	}
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 		return UIEdgeInsets(top: 20, left: 24, bottom: 20, right: 24)
-	}
-}
-
-extension UIColor {
-	convenience init(red: Int, green: Int, blue: Int) {
-		assert(red >= 0 && red <= 255, "Invalid red component")
-		assert(green >= 0 && green <= 255, "Invalid green component")
-		assert(blue >= 0 && blue <= 255, "Invalid blue component")
-		
-		self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
-	}
-	
-	convenience init(rgb: Int) {
-		self.init(
-			red: (rgb >> 16) & 0xFF,
-			green: (rgb >> 8) & 0xFF,
-			blue: rgb & 0xFF
-		)
 	}
 }

@@ -82,7 +82,7 @@
 		7398F63520EDF903005EFA9B /* LayoutHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutHelper.swift; sourceTree = "<group>"; };
 		7398F63620EDF903005EFA9B /* CardGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardGroup.swift; sourceTree = "<group>"; };
 		7398F63720EDF903005EFA9B /* CardArticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardArticle.swift; sourceTree = "<group>"; };
-		C9A730E31DAC7D4C001A6281 /* LivePhotoEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivePhotoEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9A730E31DAC7D4C001A6281 /* Livert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Livert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9A730E61DAC7D4C001A6281 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9A730E81DAC7D4C001A6281 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C9A730EB1DAC7D4C001A6281 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 		C9A730E41DAC7D4C001A6281 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C9A730E31DAC7D4C001A6281 /* LivePhotoEditor.app */,
+				C9A730E31DAC7D4C001A6281 /* Livert.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -202,9 +202,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C9A730E21DAC7D4C001A6281 /* LivePhotoEditor */ = {
+		C9A730E21DAC7D4C001A6281 /* Livert */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C9A730F51DAC7D4C001A6281 /* Build configuration list for PBXNativeTarget "LivePhotoEditor" */;
+			buildConfigurationList = C9A730F51DAC7D4C001A6281 /* Build configuration list for PBXNativeTarget "Livert" */;
 			buildPhases = (
 				C9A730DF1DAC7D4C001A6281 /* Sources */,
 				C9A730E01DAC7D4C001A6281 /* Frameworks */,
@@ -215,9 +215,9 @@
 			);
 			dependencies = (
 			);
-			name = LivePhotoEditor;
+			name = Livert;
 			productName = LivePhotoEditor;
-			productReference = C9A730E31DAC7D4C001A6281 /* LivePhotoEditor.app */;
+			productReference = C9A730E31DAC7D4C001A6281 /* Livert.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -250,7 +250,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C9A730E21DAC7D4C001A6281 /* LivePhotoEditor */,
+				C9A730E21DAC7D4C001A6281 /* Livert */,
 			);
 		};
 /* End PBXProject section */
@@ -458,7 +458,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C9A730F51DAC7D4C001A6281 /* Build configuration list for PBXNativeTarget "LivePhotoEditor" */ = {
+		C9A730F51DAC7D4C001A6281 /* Build configuration list for PBXNativeTarget "Livert" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C9A730F61DAC7D4C001A6281 /* Debug */,

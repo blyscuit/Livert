@@ -112,7 +112,8 @@ internal class DetailViewController: UIViewController {
             
             
         }
-        
+		
+		self.detailView?.alpha = 1
         self.scrollView.panGestureRecognizer.isEnabled = true
         
         self.delegate?.cardDidShowDetailView?(card: self.card)
@@ -120,12 +121,13 @@ internal class DetailViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.delegate?.cardWillCloseDetailView?(card: self.card)
-        detailView?.alpha = 0
+//        detailView?.alpha = 0
         snap.removeFromSuperview()
         xButton.removeFromSuperview()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+		self.detailView?.alpha = 1
         self.delegate?.cardDidCloseDetailView?(card: self.card)
     }
     
@@ -204,6 +206,9 @@ internal class DetailViewController: UIViewController {
         
         let y = scrollView.contentOffset.y
         xButton.alpha = (y - (card.backgroundIV.bounds.height * 0.6)) * ratio
+		if let detail = detailView {
+			detail.alpha = (dragThreadhold - outline) / dragThreadhold
+		}
         
         if outline > dragThreadhold {
             dismissVC()
@@ -212,6 +217,7 @@ internal class DetailViewController: UIViewController {
     
     func resetScrollViewSize() {
         UIView.animate(withDuration: 0.3) {
+			self.detailView?.alpha = 1
             if self.isFullscreen {
                 self.scrollView.frame.size = CGSize(width: self.view.bounds.width, height: self.view.bounds.height)
                 self.scrollView.sizeToFit()
@@ -227,6 +233,10 @@ internal class DetailViewController: UIViewController {
     
     @objc func dismissVC(){
         scrollView.contentOffset.y = 0
+//		self.detailView?.alpha = 1
+		dismiss(animated: true, completion: {
+			self.detailView?.alpha = 1
+		})
         dismiss(animated: true, completion: nil)
     }
 }

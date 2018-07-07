@@ -96,6 +96,7 @@ import UIKit
     public func shouldPresent( _ contentViewController: UIViewController?, from superVC: UIViewController?, fullscreen: Bool = false) {
         if let content = contentViewController {
             self.superVC = superVC
+			if detailVC.childViewControllers.count > 0 { detailVC.childViewControllers.first?.removeFromParentViewController() }
             detailVC.addChildViewController(content)
             detailVC.detailView = content.view
             detailVC.card = self

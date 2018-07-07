@@ -375,11 +375,11 @@
             <objects>
                 <viewController storyboardIdentifier="CardContent" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VAg-cL-iBv" customClass="CardContentViewController" customModule="LivePhotoEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="y5C-d8-nQI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8U-wN-Y73">
-                                <rect key="frame" x="113" y="80" width="150" height="44"/>
+                                <rect key="frame" x="113" y="60" width="150" height="44"/>
                                 <color key="backgroundColor" red="0.054901960784313725" green="0.066666666666666666" blue="0.027450980392156862" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="HWc-vd-fOm"/>
@@ -399,6 +399,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.10588235294117647" green="0.10980392156862745" blue="0.11372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="bkC-PD-feM" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Y8U-wN-Y73" secondAttribute="bottom" constant="30" id="ZpE-KD-Jo9"/>
                             <constraint firstItem="Y8U-wN-Y73" firstAttribute="centerX" secondItem="bkC-PD-feM" secondAttribute="centerX" id="aOn-lW-8gs"/>
                             <constraint firstItem="Y8U-wN-Y73" firstAttribute="top" secondItem="bkC-PD-feM" secondAttribute="top" constant="60" id="h3z-lc-PZO"/>
                         </constraints>
@@ -406,6 +407,8 @@
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="160"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4qc-BA-1HV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

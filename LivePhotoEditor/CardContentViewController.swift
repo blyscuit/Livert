@@ -15,11 +15,13 @@ class CardContentViewController: UIViewController {
 	var asset: PHAsset?
 	var filterName: String?
     override func viewDidLoad() {
-        print("Loaded!")
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
 		statusBarHidden = true
+	}
+	override func viewDidAppear(_ animated: Bool) {
+		print(filterName)
 	}
 	override func viewDidDisappear(_ animated: Bool) {
 		statusBarHidden = false
