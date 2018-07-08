@@ -356,6 +356,9 @@ extension InspirationsViewController: CardDelegate {
 	func cardDidCloseDetailView(card: Card) {
 //		detailVC = storyboard?.instantiateViewController(withIdentifier: "CardContent") as? CardContentViewController
 	}
+	func cardDidShowDetailView(card: Card) {
+		
+	}
 }
 
 extension InspirationsViewController: UICollectionViewDelegateFlowLayout {

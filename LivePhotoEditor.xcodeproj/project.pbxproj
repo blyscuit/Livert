@@ -19,6 +19,8 @@
 		683F7F4120F0A152009F0783 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683F7F4020F0A152009F0783 /* FlowLayout.swift */; };
 		683F7F4320F0AAFB009F0783 /* CardContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683F7F4220F0AAFB009F0783 /* CardContentViewController.swift */; };
 		683F7F4520F0B699009F0783 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683F7F4420F0B699009F0783 /* ButtonCell.swift */; };
+		683F7F4920F26B20009F0783 /* FullUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683F7F4820F26B20009F0783 /* FullUnlock.swift */; };
+		683F7F4B20F2729B009F0783 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683F7F4A20F2729B009F0783 /* StoreKit.framework */; };
 		6882F53120D403A90035F272 /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6882F53020D403A80035F272 /* ImageCollectionViewCell.xib */; };
 		7315F90920D3D37A00C5C95B /* TLTProgessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F90820D3D37900C5C95B /* TLTProgessView.swift */; };
 		7315F90E20D3D38A00C5C95B /* GlassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F90A20D3D38A00C5C95B /* GlassViewController.swift */; };
@@ -67,6 +69,8 @@
 		683F7F4020F0A152009F0783 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		683F7F4220F0AAFB009F0783 /* CardContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardContentViewController.swift; sourceTree = "<group>"; };
 		683F7F4420F0B699009F0783 /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		683F7F4820F26B20009F0783 /* FullUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullUnlock.swift; sourceTree = "<group>"; };
+		683F7F4A20F2729B009F0783 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6882F53020D403A80035F272 /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		7315F90820D3D37900C5C95B /* TLTProgessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLTProgessView.swift; sourceTree = "<group>"; };
 		7315F90A20D3D38A00C5C95B /* GlassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlassViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				683F7F4B20F2729B009F0783 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +110,7 @@
 		683F7F3B20F0937B009F0783 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				683F7F4A20F2729B009F0783 /* StoreKit.framework */,
 				683F7F3C20F0937B009F0783 /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -180,6 +186,7 @@
 				683F7F3E20F09A45009F0783 /* CardCell.swift */,
 				6812648320E2892F00AEE238 /* Inspirations.plist */,
 				6812648120E2892E00AEE238 /* InspirationsViewController.swift */,
+				683F7F4820F26B20009F0783 /* FullUnlock.swift */,
 				683F7F4220F0AAFB009F0783 /* CardContentViewController.swift */,
 				683F7F4020F0A152009F0783 /* FlowLayout.swift */,
 				6812648420E2892F00AEE238 /* Session.swift */,
@@ -234,6 +241,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 93QF44Z6JU;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -301,6 +313,7 @@
 				6812648F20E2893000AEE238 /* InspirationCell.swift in Sources */,
 				C9A730E91DAC7D4C001A6281 /* ViewController.swift in Sources */,
 				C9A730E71DAC7D4C001A6281 /* AppDelegate.swift in Sources */,
+				683F7F4920F26B20009F0783 /* FullUnlock.swift in Sources */,
 				6812648A20E2893000AEE238 /* UIColor+Palette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,11 +437,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 93QF44Z6JU;
 				INFOPLIST_FILE = LivePhotoEditor/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.confusians.Livert;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -438,11 +452,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 93QF44Z6JU;
 				INFOPLIST_FILE = LivePhotoEditor/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.confusians.Livert;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -11,8 +11,12 @@ import UIKit
 class ButtonCell: UICollectionViewCell {
 	
 	var loadTapped: ((UICollectionViewCell) -> Void)?
-	
+	@IBOutlet weak var countLabel: UILabel!
 	@IBAction func loadPress(_ sender: Any) {
 		loadTapped?(self)
+	}
+	
+	override func didMoveToSuperview() {
+		countLabel.layer.cornerRadius = countLabel.frame.size.height/2
 	}
 }

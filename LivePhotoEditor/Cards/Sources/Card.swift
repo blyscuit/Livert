@@ -111,15 +111,16 @@ import UIKit
 
 		if let content = contentViewController {
 		
-		detailVC = DetailViewController()
-		detailVC.transitioningDelegate = self
+			detailVC = DetailViewController()
+			detailVC.transitioningDelegate = self
 		
-		self.superVC = superVC
-		detailVC.addChildViewController(content)
-		detailVC.detailView = content.view
-		detailVC.card = self
-		detailVC.delegate = self.delegate
-		detailVC.isFullscreen = fullscreen
+			self.superVC = superVC
+			detailVC.addChildViewController(content)
+//			detailVC.childVC = content
+			detailVC.detailView = content.view
+			detailVC.card = self
+			detailVC.delegate = self.delegate
+			detailVC.isFullscreen = fullscreen
 		}
     }
     /**
