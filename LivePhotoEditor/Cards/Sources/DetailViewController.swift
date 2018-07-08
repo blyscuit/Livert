@@ -94,8 +94,10 @@ internal class DetailViewController: UIViewController {
         view.insertSubview(snap, belowSubview: blurView)
         
         if let detail = detailView {
-            
-            detail.alpha = 1
+			
+			UIView.animate(withDuration: 0.3) {
+				detail.alpha = 1
+			}
             detail.frame = CGRect(x: 0,
                                   y: card.backgroundIV.bounds.maxY,
                                   width: scrollView.frame.width,
@@ -113,7 +115,6 @@ internal class DetailViewController: UIViewController {
             
         }
 		
-		self.detailView?.alpha = 1
         self.scrollView.panGestureRecognizer.isEnabled = true
         
         self.delegate?.cardDidShowDetailView?(card: self.card)
@@ -121,13 +122,13 @@ internal class DetailViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.delegate?.cardWillCloseDetailView?(card: self.card)
-//        detailView?.alpha = 0
+        detailView?.alpha = 0
         snap.removeFromSuperview()
         xButton.removeFromSuperview()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-		self.detailView?.alpha = 1
+		
         self.delegate?.cardDidCloseDetailView?(card: self.card)
     }
     

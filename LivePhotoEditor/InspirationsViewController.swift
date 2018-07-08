@@ -297,7 +297,7 @@ extension InspirationsViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return (showingPhoto != nil) ? images.count : 1
+		return (showingPhoto != nil) ? images.count : 2
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		if indexPath.row < images.count {
@@ -310,11 +310,16 @@ extension InspirationsViewController {
 			cell.imageView.backgroundColor = collectionView.backgroundColor
 			return cell
 		} else {
-			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmptyCell", for: indexPath) as! ButtonCell
-			cell.loadTapped = { [unowned self] (buttonCell) -> Void in
-				self.showImagePicker()
+			if indexPath.item == 0 {
+				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmptyCell", for: indexPath) as! ButtonCell
+				cell.loadTapped = { [unowned self] (buttonCell) -> Void in
+					self.showImagePicker()
+				}
+				return cell
+			} else {
+				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CreditCell", for: indexPath)
+				return cell
 			}
-			return cell
 		}
 		
     }

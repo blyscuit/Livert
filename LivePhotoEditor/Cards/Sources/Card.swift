@@ -94,19 +94,33 @@ import UIKit
      from                   -> Your current ViewController (self)
      */
     public func shouldPresent( _ contentViewController: UIViewController?, from superVC: UIViewController?, fullscreen: Bool = false) {
-        if let content = contentViewController {
-			content.willMove(toParentViewController: nil)
-			content.removeFromParentViewController()
-            self.superVC = superVC
-			if detailVC.childViewControllers.count > 0 { fatalError("diediedie");}// return; detailVC.childViewControllers.first?.removeFromParentViewController() }
-            detailVC.addChildViewController(content)
-			content.didMove(toParentViewController: detailVC)
-			if detailVC.childViewControllers.count <= 0 { fatalError("diediedie2");}
-            detailVC.detailView = content.view
-            detailVC.card = self
-            detailVC.delegate = self.delegate
-            detailVC.isFullscreen = fullscreen
-        }
+//        if let content = contentViewController {
+//			content.willMove(toParentViewController: nil)
+//			content.removeFromParentViewController()
+//            self.superVC = superVC
+//			if detailVC.childViewControllers.count > 0 { fatalError("diediedie");}// return; detailVC.childViewControllers.first?.removeFromParentViewController() }
+//			content.willMove(toParentViewController: detailVC)
+//            detailVC.addChildViewController(content)
+//			content.didMove(toParentViewController: detailVC)
+//			if detailVC.childViewControllers.count <= 0 { fatalError("diediedie2");}
+//            detailVC.detailView = content.view
+//            detailVC.card = self
+//            detailVC.delegate = self.delegate
+//            detailVC.isFullscreen = fullscreen
+//        }
+
+		if let content = contentViewController {
+		
+		detailVC = DetailViewController()
+		detailVC.transitioningDelegate = self
+		
+		self.superVC = superVC
+		detailVC.addChildViewController(content)
+		detailVC.detailView = content.view
+		detailVC.card = self
+		detailVC.delegate = self.delegate
+		detailVC.isFullscreen = fullscreen
+		}
     }
     /**
      If the card should display parallax effect.

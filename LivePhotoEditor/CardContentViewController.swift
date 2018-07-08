@@ -20,9 +20,6 @@ class CardContentViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		statusBarHidden = true
 	}
-	override func viewDidAppear(_ animated: Bool) {
-		print(filterName)
-	}
 	override func viewDidDisappear(_ animated: Bool) {
 		statusBarHidden = false
 	}
