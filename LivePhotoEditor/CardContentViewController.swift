@@ -113,6 +113,8 @@ class CardContentViewController: UIViewController {
 					}, completionHandler: { success, error in
 						if !success {
 							print(Date(), #function, #line, "cannot edit asset: \(error)")
+						} else {
+							IAPManager.shared().decreasePhotoCount()
 						}
 					})
 				} else {
@@ -135,6 +137,8 @@ class CardContentViewController: UIViewController {
 								}, completionHandler: { success, error in
 									if !success {
 										print(Date(), #function, #line, "cannot edit asset: \(error)")
+									} else {
+										IAPManager.shared().decreasePhotoCount()
 									}
 								})
 							} else {

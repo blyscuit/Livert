@@ -10,6 +10,8 @@ import UIKit
 
 class ButtonCell: UICollectionViewCell {
 	
+	@IBOutlet weak var resetCountDownLabel: UILabel!
+	@IBOutlet weak var labelBackgroundView: UIView!
 	var loadTapped: ((UICollectionViewCell) -> Void)?
 	@IBOutlet weak var countLabel: UILabel!
 	@IBAction func loadPress(_ sender: Any) {
@@ -17,6 +19,7 @@ class ButtonCell: UICollectionViewCell {
 	}
 	
 	override func didMoveToSuperview() {
-		countLabel.layer.cornerRadius = countLabel.frame.size.height/2
+		labelBackgroundView.layer.cornerRadius = labelBackgroundView.frame.size.height/2
+		countLabel.textAlignment = .center
 	}
 }

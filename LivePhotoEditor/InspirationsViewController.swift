@@ -24,13 +24,15 @@ class InspirationsViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-		backgroundQueue.maxConcurrentOperationCount = 3
+		backgroundQueue.maxConcurrentOperationCount = 4
 		PHPhotoLibrary.shared().register(self)
 		
         collectionView?.backgroundColor = UIColor(rgb: 0x1B1C1D)
 //        collectionView?.decelerationRate = UIScrollViewDecelerationRateFast
 		collectionView?.collectionViewLayout = UICollectionViewFlowLayout()
 		detailVC = storyboard?.instantiateViewController(withIdentifier: "CardContent") as? CardContentViewController
+		
+		
     }
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 		super.viewWillTransition(to: size, with: coordinator)
@@ -71,18 +73,54 @@ class InspirationsViewController: UICollectionViewController {
 	
 	@IBAction func addButtonDidTouch(_ sender: AnyObject) {
 		self.showImagePicker()
+//		showBuyAlert()
 	}
 	
 	
 	// MARK: - Private
 	
 	fileprivate func showImagePicker() {
+		if IAPManager.shared().photoLeft == 0 {
+			showBuyAlert()
+			return
+		} else if IAPManager.shared().shouldShowAlert() {
+			showWaitAlert()
+		} else {
+			presentImagePicker()
+		}
+	}
+	
+	fileprivate func presentImagePicker() {
 		let controller = UIImagePickerController()
 		controller.delegate = self
 		controller.sourceType = .photoLibrary
 		controller.allowsEditing = false
 		controller.mediaTypes = [kUTTypeImage as String, kUTTypeLivePhoto as String]
 		self.present(controller, animated: true, completion: nil)
+	}
+	
+	fileprivate func showBuyAlert() {
+		let alert = FCAlertView()
+		alert.delegate = self
+		alert.colorScheme = .flatMidnight
+		alert.showAlert(in: self,
+						withTitle: "Full Livert",
+						withSubtitle: "You ran out of this week free Livert. Upgarde to Full version for unlimited Liverts. 😜👌",
+						withCustomImage: #imageLiteral(resourceName: "Luna"),
+						withDoneButtonTitle: "Unlock Full",
+						andButtons: ["Wait"])
+	}
+	
+	fileprivate func showWaitAlert() {
+		let alert = FCAlertView()
+		alert.delegate = self
+		alert.colorScheme = .flatMidnight
+		alert.showAlert(in: self,
+						withTitle: "Full Livert",
+						withSubtitle: "Upgarde to Full version for unlimited Liverts.",
+						withCustomImage: #imageLiteral(resourceName: "Luna"),
+						withDoneButtonTitle: "Unlock Full",
+						andButtons: ["Wait"])
 	}
 	
 	
@@ -182,7 +220,6 @@ class InspirationsViewController: UICollectionViewController {
 			self.collectionView?.reloadData()
 		})
 	}
-	
 	
 	
 	fileprivate func applyFilterPreview(_ filterName: String) {
@@ -285,6 +322,8 @@ extension InspirationsViewController: UINavigationControllerDelegate, UIImagePic
 		
 		self.updateImage()
 		
+		IAPManager.shared().resetPhoto()
+		
 		dismiss(animated: true, completion: nil)
 	}
 }
@@ -315,6 +354,10 @@ extension InspirationsViewController {
 				cell.loadTapped = { [unowned self] (buttonCell) -> Void in
 					self.showImagePicker()
 				}
+				cell.countLabel.clipsToBounds = true
+				cell.countLabel.isHidden = IAPManager.shared().fullPurchased
+				cell.countLabel.text = "Free: \(IAPManager.shared().photoLeft)"
+				cell.resetCountDownLabel.text = "\(IAPManager.shared().getNextResetDay()) days until reset"
 				return cell
 			} else {
 				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CreditCell", for: indexPath)
@@ -361,8 +404,22 @@ extension InspirationsViewController: CardDelegate {
 	}
 }
 
+extension InspirationsViewController: FCAlertViewDelegate {
+	func FCAlertDoneButtonClicked(alertView: FCAlertView) {
+		//iap
+	}
+	func alertView(alertView: FCAlertView, clickedButtonIndex index: Int, buttonTitle title: String) {
+		if title == "Wait" && IAPManager.shared().photoLeft > 0 {
+			presentImagePicker()
+		}
+	}
+}
+
 extension InspirationsViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt: IndexPath) -> CGSize {
+		if images.count <= 0 && sizeForItemAt.item == 1 {
+			return CGSize(width: self.view.frame.size.width - 48, height: 100)
+		}
 		return CGSize(width: self.view.frame.size.width - 48, height: (self.view.frame.size.width - 48) * 5/4)
 	}
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

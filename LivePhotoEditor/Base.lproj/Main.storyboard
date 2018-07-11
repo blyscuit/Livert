@@ -4,10 +4,8 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LivePhotoEditor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Livert" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -103,7 +101,7 @@
         <!--Mock View Controller-->
         <scene sceneID="1yf-Tm-JcI">
             <objects>
-                <viewController id="ckE-5F-ztd" customClass="MockViewController" customModule="LivePhotoEditor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ckE-5F-ztd" customClass="MockViewController" customModule="Livert" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bdk-SL-IWt"/>
                         <viewControllerLayoutGuide type="bottom" id="jrt-wW-cyV"/>
@@ -112,7 +110,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hf-o1-gjy" customClass="TLTProgessView" customModule="LivePhotoEditor" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hf-o1-gjy" customClass="TLTProgessView" customModule="Livert" customModuleProvider="target">
                                 <rect key="frame" x="33" y="187" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -139,15 +137,15 @@
         <!--Inspirations View Controller-->
         <scene sceneID="XEj-Zw-eWd">
             <objects>
-                <collectionViewController id="0Bh-pT-81Z" customClass="InspirationsViewController" customModule="LivePhotoEditor" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="0Bh-pT-81Z" customClass="InspirationsViewController" customModule="Livert" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" prefetchingEnabled="NO" id="5MG-Xs-0TM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewLayout key="collectionViewLayout" id="Lkp-Hg-mVr" customClass="UltravisualLayout" customModule="LivePhotoEditor" customModuleProvider="target"/>
+                        <collectionViewLayout key="collectionViewLayout" id="Lkp-Hg-mVr" customClass="UltravisualLayout" customModule="Livert" customModuleProvider="target"/>
                         <cells>
-                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CardCell" id="9TS-BO-yep" customClass="CardCell" customModule="LivePhotoEditor" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="210" width="200" height="200"/>
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CardCell" id="9TS-BO-yep" customClass="CardCell" customModule="Livert" customModuleProvider="target">
+                                <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -159,7 +157,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lju-L1-Qfj">
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="180"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rgw-AW-CbO" customClass="CardArticle" customModule="LivePhotoEditor" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rgw-AW-CbO" customClass="CardArticle" customModule="Livert" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="200" height="180"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <userDefinedRuntimeAttributes>
@@ -203,8 +201,8 @@
                                     <outlet property="imageView" destination="Rgw-AW-CbO" id="0pT-xU-Qrk"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EmptyCell" id="qoX-se-c1p" customClass="ButtonCell" customModule="LivePhotoEditor" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="420" width="200" height="200"/>
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EmptyCell" id="qoX-se-c1p" customClass="ButtonCell" customModule="Livert" customModuleProvider="target">
+                                <rect key="frame" x="87.5" y="210" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -215,34 +213,56 @@
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="5wS-Vm-dTK" secondAttribute="height" multiplier="1:1" id="Qca-KO-WFS"/>
                                             </constraints>
-                                            <state key="normal" image="Flower"/>
+                                            <state key="normal" backgroundImage="Flower"/>
                                             <connections>
                                                 <action selector="loadPress:" destination="qoX-se-c1p" eventType="touchUpInside" id="eUE-iu-a7X"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Cd-Ga-Gmm">
-                                            <rect key="frame" x="137" y="159" width="43" height="21"/>
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bzz-sT-TrA">
+                                            <rect key="frame" x="128" y="171.5" width="62" height="28.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Cd-Ga-Gmm">
+                                                    <rect key="frame" x="10" y="4" width="42" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                             <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="2Cd-Ga-Gmm" secondAttribute="trailing" constant="10" id="UZf-3t-JKE"/>
+                                                <constraint firstItem="2Cd-Ga-Gmm" firstAttribute="leading" secondItem="Bzz-sT-TrA" secondAttribute="leading" constant="10" id="ax4-Oc-SB9"/>
+                                                <constraint firstAttribute="bottom" secondItem="2Cd-Ga-Gmm" secondAttribute="bottom" constant="4" id="d3S-wP-uSp"/>
+                                                <constraint firstItem="2Cd-Ga-Gmm" firstAttribute="top" secondItem="Bzz-sT-TrA" secondAttribute="top" constant="4" id="yhQ-Bm-Dzw"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MuO-1S-tTg">
+                                            <rect key="frame" x="153.5" y="157.5" width="26.5" height="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="bottomMargin" secondItem="2Cd-Ga-Gmm" secondAttribute="bottom" constant="12" id="1pN-fB-UIV"/>
+                                    <constraint firstItem="Bzz-sT-TrA" firstAttribute="top" secondItem="MuO-1S-tTg" secondAttribute="bottom" constant="2" id="83t-az-rH9"/>
                                     <constraint firstItem="5wS-Vm-dTK" firstAttribute="centerY" secondItem="qoX-se-c1p" secondAttribute="centerY" id="DGT-9L-g2s"/>
+                                    <constraint firstItem="MuO-1S-tTg" firstAttribute="trailing" secondItem="2Cd-Ga-Gmm" secondAttribute="trailing" id="DRI-tE-KsN"/>
                                     <constraint firstAttribute="trailing" secondItem="5wS-Vm-dTK" secondAttribute="trailing" id="K7g-wb-Gcg"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="2Cd-Ga-Gmm" secondAttribute="trailing" constant="12" id="UeW-uX-VkW"/>
+                                    <constraint firstItem="Bzz-sT-TrA" firstAttribute="trailing" secondItem="5wS-Vm-dTK" secondAttribute="trailing" constant="-10" id="W1l-Bd-Qty"/>
                                     <constraint firstItem="5wS-Vm-dTK" firstAttribute="leading" secondItem="qoX-se-c1p" secondAttribute="leading" id="wQb-Vy-xbZ"/>
+                                    <constraint firstItem="MuO-1S-tTg" firstAttribute="width" relation="lessThanOrEqual" secondItem="2Cd-Ga-Gmm" secondAttribute="width" id="zDd-Nb-bcB"/>
+                                    <constraint firstItem="Bzz-sT-TrA" firstAttribute="baseline" secondItem="5wS-Vm-dTK" secondAttribute="baseline" id="zno-S8-Bla"/>
                                 </constraints>
                                 <size key="customSize" width="200" height="200"/>
                                 <connections>
                                     <outlet property="countLabel" destination="2Cd-Ga-Gmm" id="Lo9-G8-6Ws"/>
+                                    <outlet property="labelBackgroundView" destination="Bzz-sT-TrA" id="a0g-j6-OzE"/>
+                                    <outlet property="resetCountDownLabel" destination="MuO-1S-tTg" id="PKH-1L-vsR"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CreditCell" id="kgq-kM-tCn">
-                                <rect key="frame" x="87.5" y="630" width="200" height="200"/>
+                                <rect key="frame" x="87.5" y="420" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -270,8 +290,8 @@
                                 </constraints>
                                 <size key="customSize" width="200" height="200"/>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InspirationCell" id="zmP-ge-xmP" customClass="InspirationCell" customModule="LivePhotoEditor" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InspirationCell" id="zmP-ge-xmP" customClass="InspirationCell" customModule="Livert" customModuleProvider="target">
+                                <rect key="frame" x="87.5" y="630" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -415,7 +435,7 @@
         <!--Card Content View Controller-->
         <scene sceneID="i5G-0x-pTt">
             <objects>
-                <viewController storyboardIdentifier="CardContent" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VAg-cL-iBv" customClass="CardContentViewController" customModule="LivePhotoEditor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CardContent" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VAg-cL-iBv" customClass="CardContentViewController" customModule="Livert" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="y5C-d8-nQI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
