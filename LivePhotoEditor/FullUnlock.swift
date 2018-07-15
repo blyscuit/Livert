@@ -142,7 +142,8 @@ class IAPManager: NSObject {
 	
 	
 	func getNextResetDay() -> String {
-		return "\(checkResetDay())"
+		let days = checkResetDay()
+		return "\(days == 0 ? 15 : days)"
 	}
 	
 	// MARK: - Accessors

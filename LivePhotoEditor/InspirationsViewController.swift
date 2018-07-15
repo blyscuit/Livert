@@ -367,7 +367,8 @@ extension InspirationsViewController {
 					self.showImagePicker()
 				}
 				cell.countLabel.clipsToBounds = true
-				cell.countLabel.isHidden = IAPManager.shared().fullPurchased
+				cell.labelBackgroundView.isHidden = IAPManager.shared().fullPurchased
+				cell.resetCountDownLabel.isHidden = IAPManager.shared().fullPurchased
 				cell.countLabel.text = "Free: \(IAPManager.shared().photoLeft)"
 				cell.resetCountDownLabel.text = "\(IAPManager.shared().getNextResetDay()) days until reset"
 				return cell
@@ -430,10 +431,16 @@ extension InspirationsViewController: FCAlertViewDelegate {
 
 extension InspirationsViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt: IndexPath) -> CGSize {
+		var size = CGSize.zero
 		if images.count <= 0 && sizeForItemAt.item == 1 {
-			return CGSize(width: self.view.frame.size.width - 48, height: 100)
+			size = CGSize(width: self.view.frame.size.width - 48, height: 100)
+		} else {
+			size = CGSize(width: self.view.frame.size.width - 48, height: (self.view.frame.size.width - 48) * 5/4)
+			if self.view.frame.size.width > 700 || self.view.frame.size.height / self.view.frame.size.width < 0.7 {
+				size = CGSize(width: size.width/2.2, height: size.height/2.2)
+			}
 		}
-		return CGSize(width: self.view.frame.size.width - 48, height: (self.view.frame.size.width - 48) * 5/4)
+		return size
 	}
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
 		return 20
