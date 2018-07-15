@@ -32,7 +32,19 @@ class InspirationsViewController: UICollectionViewController {
 		collectionView?.collectionViewLayout = UICollectionViewFlowLayout()
 		detailVC = storyboard?.instantiateViewController(withIdentifier: "CardContent") as? CardContentViewController
 		
+		IAPManager.shared().fetchAvailableProducts()
 		
+		IAPManager.shared().purchaseStatusBlock = {[weak self] (type) in
+			guard let strongSelf = self else{ return }
+			if type == .purchased {
+				let alertView = UIAlertController(title: "", message: type.message(), preferredStyle: .alert)
+				let action = UIAlertAction(title: "OK", style: .default, handler: { (alert) in
+					
+				})
+				alertView.addAction(action)
+				strongSelf.present(alertView, animated: true, completion: nil)
+			}
+		}
     }
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 		super.viewWillTransition(to: size, with: coordinator)
@@ -407,6 +419,7 @@ extension InspirationsViewController: CardDelegate {
 extension InspirationsViewController: FCAlertViewDelegate {
 	func FCAlertDoneButtonClicked(alertView: FCAlertView) {
 		//iap
+		IAPManager.shared().purchaseMyProduct(index: 0)
 	}
 	func alertView(alertView: FCAlertView, clickedButtonIndex index: Int, buttonTitle title: String) {
 		if title == "Wait" && IAPManager.shared().photoLeft > 0 {
