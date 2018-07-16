@@ -39,7 +39,7 @@ class InspirationsViewController: UICollectionViewController {
 			if type == .purchased {
 				let alertView = UIAlertController(title: "", message: type.message(), preferredStyle: .alert)
 				let action = UIAlertAction(title: "OK", style: .default, handler: { (alert) in
-					
+					strongSelf.collectionView?.reloadData()
 				})
 				alertView.addAction(action)
 				strongSelf.present(alertView, animated: true, completion: nil)
@@ -117,7 +117,7 @@ class InspirationsViewController: UICollectionViewController {
 		alert.colorScheme = .flatMidnight
 		alert.showAlert(in: self,
 						withTitle: "Full Livert",
-						withSubtitle: "You ran out of this week free Livert. Upgarde to Full version for unlimited Liverts. 😜👌",
+						withSubtitle: "You ran out of this week free Livert. Upgarde to Full version for unlimited Liverts. 🌃🌕",
 						withCustomImage: #imageLiteral(resourceName: "Luna"),
 						withDoneButtonTitle: "Unlock Full",
 						andButtons: ["Wait"])
@@ -129,7 +129,7 @@ class InspirationsViewController: UICollectionViewController {
 		alert.colorScheme = .flatMidnight
 		alert.showAlert(in: self,
 						withTitle: "Full Livert",
-						withSubtitle: "Upgarde to Full version for unlimited Liverts.",
+						withSubtitle: "Upgarde to Full version for unlimited Liverts. 🌕⭐️",
 						withCustomImage: #imageLiteral(resourceName: "Luna"),
 						withDoneButtonTitle: "Unlock Full",
 						andButtons: ["Wait"])
