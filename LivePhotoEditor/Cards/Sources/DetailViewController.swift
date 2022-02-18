@@ -107,7 +107,7 @@ internal class DetailViewController: UIViewController {
             
             
             xButton.frame = CGRect (x: scrollView.frame.maxX - 20 - 40,
-                                    y: scrollView.frame.minY + 20,
+                                    y: scrollView.frame.minY + 20 + (view.window?.safeAreaInsets.top ?? 0.0),
                                     width: 40,
                                     height: 40)
             
@@ -235,10 +235,9 @@ internal class DetailViewController: UIViewController {
     @objc func dismissVC(){
         scrollView.contentOffset.y = 0
 //		self.detailView?.alpha = 1
-		dismiss(animated: true, completion: {
+        self.dismiss(animated: true, completion: {
 			self.detailView?.alpha = 1
 		})
-        dismiss(animated: true, completion: nil)
     }
 }
 

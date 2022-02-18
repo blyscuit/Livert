@@ -35,33 +35,33 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
             
             // Detail View Controller Dismiss Animations
             card.isPresenting = false
-            
+
             let detailVC = from as! DetailViewController
             let cardBackgroundFrame = detailVC.scrollView.convert(card.backgroundIV.frame, to: nil)
             let bounce = self.bounceTransform(cardBackgroundFrame, to: card.originalFrame)
-            
+
             // Blur and fade with completion
             UIView.animate(withDuration: velocity, delay: 0, options: .curveEaseOut, animations: {
-                
+
                 detailVC.blurView.alpha = 0
                 detailVC.snap.alpha = 0
                 self.card.backgroundIV.layer.cornerRadius = self.card.cardRadius
-                
+
             }, completion: { _ in
-                
+
                 detailVC.layout(self.card.originalFrame, isPresenting: false, isAnimating: false)
                 self.card.addSubview(detailVC.card.backgroundIV)
                 transitionContext.completeTransition(true)
             })
-            
+
             // Layout with bounce effect
             UIView.animate(withDuration: velocity/2, delay: 0, options: .curveEaseOut, animations: {
-                
+
                 detailVC.layout(self.card.originalFrame, isPresenting: false, transform: bounce)
                 self.card.delegate?.cardIsHidingDetail?(card: self.card)
-                
+
             }) { _ in UIView.animate(withDuration: self.velocity/2, delay: 0, options: .curveEaseOut, animations: {
-                    
+
                 detailVC.layout(self.card.originalFrame, isPresenting: false)
                 self.card.delegate?.cardIsHidingDetail?(card: self.card)
                 })
@@ -76,7 +76,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
         let detailVC = to as! DetailViewController
         let bounce = self.bounceTransform(card.originalFrame, to: card.backgroundIV.frame)
         
-        container.bringSubview(toFront: detailVC.view)
+        container.bringSubviewToFront(detailVC.view)
         detailVC.card = card
         detailVC.layout(card.originalFrame, isPresenting: false)
         
@@ -91,6 +91,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
         }, completion: { _ in
             
             detailVC.layout(self.card.originalFrame, isPresenting: true, isAnimating: false, transform: .identity)
+            detailVC.removeFromParent()
             transitionContext.completeTransition(true)
         })
         

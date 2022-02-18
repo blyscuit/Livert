@@ -26,7 +26,6 @@
 		683F7F5820F3B84B009F0783 /* FCAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683F7F5020F3B84A009F0783 /* FCAlertView.swift */; };
 		683F7F5920F3B84B009F0783 /* checkmark-round.png in Resources */ = {isa = PBXBuildFile; fileRef = 683F7F5220F3B84A009F0783 /* checkmark-round.png */; };
 		683F7F5A20F3B84B009F0783 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683F7F5320F3B84A009F0783 /* Colors.swift */; };
-		683F7F5B20F3B84B009F0783 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 683F7F5420F3B84A009F0783 /* Info.plist */; };
 		683F7F5C20F3B84B009F0783 /* FCAlertViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683F7F5520F3B84A009F0783 /* FCAlertViewDelegate.swift */; };
 		6882F53120D403A90035F272 /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6882F53020D403A80035F272 /* ImageCollectionViewCell.xib */; };
 		7315F90920D3D37A00C5C95B /* TLTProgessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7315F90820D3D37900C5C95B /* TLTProgessView.swift */; };
@@ -84,7 +83,6 @@
 		683F7F5120F3B84A009F0783 /* FCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCAlertView.h; sourceTree = "<group>"; };
 		683F7F5220F3B84A009F0783 /* checkmark-round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark-round.png"; sourceTree = "<group>"; };
 		683F7F5320F3B84A009F0783 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		683F7F5420F3B84A009F0783 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		683F7F5520F3B84A009F0783 /* FCAlertViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCAlertViewDelegate.swift; sourceTree = "<group>"; };
 		6882F53020D403A80035F272 /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		7315F90820D3D37900C5C95B /* TLTProgessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLTProgessView.swift; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 				683F7F5120F3B84A009F0783 /* FCAlertView.h */,
 				683F7F5220F3B84A009F0783 /* checkmark-round.png */,
 				683F7F5320F3B84A009F0783 /* Colors.swift */,
-				683F7F5420F3B84A009F0783 /* Info.plist */,
 				683F7F5520F3B84A009F0783 /* FCAlertViewDelegate.swift */,
 			);
 			path = FCAlertView;
@@ -285,6 +282,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -311,7 +309,6 @@
 				683F7F5720F3B84B009F0783 /* close-round.png in Resources */,
 				6812648B20E2893000AEE238 /* Inspirations.plist in Resources */,
 				683F7F5620F3B84B009F0783 /* alert-round.png in Resources */,
-				683F7F5B20F3B84B009F0783 /* Info.plist in Resources */,
 				683F7F5920F3B84B009F0783 /* checkmark-round.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -477,9 +474,10 @@
 				INFOPLIST_FILE = LivePhotoEditor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.confusians.Livert;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -492,9 +490,10 @@
 				INFOPLIST_FILE = LivePhotoEditor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.confusians.Livert;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

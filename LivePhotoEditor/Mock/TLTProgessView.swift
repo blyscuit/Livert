@@ -90,7 +90,7 @@ class TLTProgessView: UIControl {
             headerImage.frame = CGRect(x: _progress * self.bounds.width - imageWidth/7, y: self.bounds.height/2 - height/(3/4), width: imageWidth, height: imageHeight)
             headerImage.setNeedsDisplay()
             headerImage.contents = UIImage(named: thumbImageName)?.cgImage
-            headerImage.contentsGravity = kCAGravityResizeAspect
+            headerImage.contentsGravity = CALayerContentsGravity.resizeAspect
             layer.addSublayer(headerImage)
             
             self.clipsToBounds = true

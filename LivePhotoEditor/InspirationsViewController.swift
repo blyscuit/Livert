@@ -267,7 +267,7 @@ class InspirationsViewController: UICollectionViewController {
 			
 			// Set frameProcessor
 			livePhotoContext.frameProcessor = { frame, _ in
-				return frame.image.applyingFilter(filterName, withInputParameters: nil)
+                return frame.image.applyingFilter(filterName)
 			}
 			
 			livePhotoContext.prepareLivePhotoForPlayback(withTargetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight), options: nil, completionHandler: { photo, error in
@@ -323,23 +323,18 @@ extension InspirationsViewController: PHPhotoLibraryChangeObserver {
 // MARK: - UINavigationControllerDelegate
 
 extension InspirationsViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-	func imagePickerController(_ picker: UIImagePickerController,
-							   didFinishPickingMediaWithInfo info: [String : Any]) {
-		// get ALAssetURL
-		let url = info[UIImagePickerControllerReferenceURL] as! URL?
-		
-		// Get PHAsset
-		let fetchResult = PHAsset.fetchAssets(withALAssetURLs: [url!], options: nil)
-		self.asset = fetchResult.firstObject
-		
-		self.updateImage()
-		
-		IAPManager.shared().resetPhoto()
-		
-		dismiss(animated: true, completion: nil)
-	}
-}
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        // Get PHAsset
+        let fetchResult = info[UIImagePickerController.InfoKey.phAsset] as! PHAsset?
+        self.asset = fetchResult
 
+        self.updateImage()
+        
+        IAPManager.shared().resetPhoto()
+
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
 
 extension InspirationsViewController {
     

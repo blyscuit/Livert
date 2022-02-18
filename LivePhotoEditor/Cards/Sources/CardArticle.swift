@@ -75,7 +75,7 @@ import UIKit
         
         categoryLbl.text = category.uppercased()
         categoryLbl.textColor = textColor.withAlphaComponent(0.3)
-        categoryLbl.font = UIFont.systemFont(ofSize: 100, weight: UIFontWeightBold)
+        categoryLbl.font = UIFont.systemFont(ofSize: 100, weight: UIFont.Weight.bold)
         categoryLbl.shadowColor = UIColor.black
         categoryLbl.shadowOffset = CGSize.zero
         categoryLbl.adjustsFontSizeToFitWidth = true
@@ -85,7 +85,7 @@ import UIKit
         
         titleLbl.textColor = textColor
         titleLbl.text = title
-        titleLbl.font = UIFont.systemFont(ofSize: titleSize, weight: UIFontWeightBold)
+        titleLbl.font = UIFont.systemFont(ofSize: titleSize, weight: UIFont.Weight.bold)
         titleLbl.adjustsFontSizeToFitWidth = true
         titleLbl.minimumScaleFactor = 0.1
         titleLbl.lineBreakMode = .byClipping
@@ -94,7 +94,7 @@ import UIKit
         
         subtitleLbl.text = subtitle
         subtitleLbl.textColor = textColor
-        subtitleLbl.font = UIFont.systemFont(ofSize: subtitleSize, weight: UIFontWeightMedium)
+        subtitleLbl.font = UIFont.systemFont(ofSize: subtitleSize, weight: UIFont.Weight.medium)
         subtitleLbl.shadowColor = UIColor.black
         subtitleLbl.shadowOffset = CGSize.zero
         subtitleLbl.adjustsFontSizeToFitWidth = true

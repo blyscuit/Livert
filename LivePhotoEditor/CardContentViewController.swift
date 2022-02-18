@@ -50,7 +50,7 @@ class CardContentViewController: UIViewController {
 		alert.view.tintColor = UIColor.black
 		let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50)) as UIActivityIndicatorView
 		loadingIndicator.hidesWhenStopped = true
-		loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
 		loadingIndicator.startAnimating();
 		
 		alert.view.addSubview(loadingIndicator)
@@ -99,7 +99,7 @@ class CardContentViewController: UIViewController {
 			
 			// Set frameProcessor
 			livePhotoContext.frameProcessor = { frame, _ in
-				return frame.image.applyingFilter(filterName, withInputParameters: nil)
+                return frame.image.applyingFilter(filterName)
 			}
 			self.dismiss(animated: false, completion: nil)
 
@@ -124,7 +124,7 @@ class CardContentViewController: UIViewController {
 						var image = UIImage(contentsOfFile: path)!
 						if #available(iOS 11.0, *) {
 							let ciimage = CIImage(image: image)?.applyingFilter(filterName)
-							let renderedJPEGData = UIImageJPEGRepresentation(InspirationsViewController.convert(cmage: ciimage!), 0.9)
+                            let renderedJPEGData = InspirationsViewController.convert(cmage: ciimage!).jpegData(compressionQuality: 0.9)
 							// Save JPEG data
 							
 							

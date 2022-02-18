@@ -110,12 +110,13 @@ import UIKit
 //        }
 
 		if let content = contentViewController {
-		
+
 			detailVC = DetailViewController()
 			detailVC.transitioningDelegate = self
 		
 			self.superVC = superVC
-			detailVC.addChildViewController(content)
+            superVC?.transitioningDelegate = self
+            detailVC.addChild(content)
 //			detailVC.childVC = content
 			detailVC.detailView = content.view
 			detailVC.card = self
@@ -260,7 +261,7 @@ extension Card: UIViewControllerTransitioningDelegate {
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return Animator(presenting: false, from: self)
     }
-    
+
 }
 
     //MARK: - Gesture Delegate
@@ -290,7 +291,7 @@ extension UILabel {
         let attributedString = NSMutableAttributedString(string: self.text!)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = height
-        attributedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
         self.attributedText = attributedString
     }
     

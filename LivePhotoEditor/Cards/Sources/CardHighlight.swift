@@ -99,7 +99,7 @@ import UIKit
     override  func initialize() {
         super.initialize()
         
-        actionBtn.addTarget(self, action: #selector(buttonTapped), for: UIControlEvents.touchUpInside)
+        actionBtn.addTarget(self, action: #selector(buttonTapped), for: UIControl.Event.touchUpInside)
         
         backgroundIV.addSubview(iconIV)
         backgroundIV.addSubview(titleLbl)
@@ -125,13 +125,13 @@ import UIKit
         
         titleLbl.text = title.uppercased()
         titleLbl.textColor = textColor
-        titleLbl.font = UIFont.systemFont(ofSize: titleSize, weight: UIFontWeightHeavy)
+        titleLbl.font = UIFont.systemFont(ofSize: titleSize, weight: UIFont.Weight.heavy)
         titleLbl.adjustsFontSizeToFitWidth = true
         titleLbl.lineHeight(0.70)
         titleLbl.minimumScaleFactor = 0.1
         titleLbl.lineBreakMode = .byTruncatingTail
         titleLbl.numberOfLines = 3
-        backgroundIV.bringSubview(toFront: titleLbl)
+        backgroundIV.bringSubviewToFront(titleLbl)
         
         itemTitleLbl.textColor = textColor
         itemTitleLbl.text = itemTitle
@@ -153,7 +153,7 @@ import UIKit
         actionBtn.backgroundColor = UIColor.clear
         actionBtn.layer.backgroundColor = lightColor.cgColor
         actionBtn.clipsToBounds = true
-        let btnTitle = NSAttributedString(string: buttonText.uppercased(), attributes: [ NSFontAttributeName : UIFont.systemFont(ofSize: 16, weight: UIFontWeightBlack), NSForegroundColorAttributeName : self.tintColor])
+        let btnTitle = NSAttributedString(string: buttonText.uppercased(), attributes: [ NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.black), NSAttributedString.Key.foregroundColor : self.tintColor])
         actionBtn.setAttributedTitle(btnTitle, for: .normal)
         
         btnWidth = CGFloat((buttonText.count + 2) * 10)
