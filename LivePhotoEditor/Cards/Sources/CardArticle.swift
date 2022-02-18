@@ -113,7 +113,7 @@ import UIKit
         let gimme  = LayoutHelper(rect: backgroundIV.bounds)
         
         categoryLbl.frame = CGRect(x: insets,
-                                   y: insets,
+                                   y: insets + (window?.safeAreaInsets.top ?? 0.0),
                                    width: gimme.X(80),
                                    height: gimme.Y(7))
         

@@ -148,7 +148,7 @@ class InspirationsViewController: UICollectionViewController {
 		let photoOptions = PHImageRequestOptions()
 		photoOptions.isNetworkAccessAllowed = true
 		photoOptions.isSynchronous = true
-		photoOptions.deliveryMode = .fastFormat
+        photoOptions.deliveryMode = .highQualityFormat
 		
 //		// Request the live photo for the asset from the default PHImageManager.
 //		PHImageManager.default().requestLivePhoto(for: asset,

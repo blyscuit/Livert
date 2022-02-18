@@ -189,7 +189,7 @@ internal class DetailViewController: UIViewController {
     }
     
     func scrollViewSizeDrag(outline: CGFloat) {
-        let dragThreadhold = view.frame.size.width * 2/5
+        let dragThreadhold = view.frame.size.width * 3.6/5
         let ratio = outline > 0 ? 0.7 + 0.3 * (dragThreadhold - outline) / dragThreadhold : 1
         
         if self.isFullscreen {
@@ -235,8 +235,10 @@ internal class DetailViewController: UIViewController {
     @objc func dismissVC(){
         scrollView.contentOffset.y = 0
 //		self.detailView?.alpha = 1
+        let parent = presentingViewController
         self.dismiss(animated: true, completion: {
 			self.detailView?.alpha = 1
+            parent?.dismiss(animated: true, completion: nil)
 		})
     }
 }

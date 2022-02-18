@@ -115,7 +115,6 @@ import UIKit
 			detailVC.transitioningDelegate = self
 		
 			self.superVC = superVC
-            superVC?.transitioningDelegate = self
             detailVC.addChild(content)
 //			detailVC.childVC = content
 			detailVC.detailView = content.view
@@ -141,11 +140,13 @@ import UIKit
     //Private Vars
     fileprivate var tap = UITapGestureRecognizer()
     fileprivate var detailVC = DetailViewController()
-    var superVC: UIViewController?
+    weak var superVC: UIViewController?
     var originalFrame = CGRect.zero
     var backgroundIV = UIImageView()
     var insets = CGFloat()
     var isPresenting = false
+
+    var animator: Animator?
     
     //MARK: - View Life Cycle
     
@@ -211,7 +212,11 @@ import UIKit
         self.delegate?.cardDidTapInside?(card: self)
         
         if let vc = superVC {
-            vc.present(self.detailVC, animated: true, completion: nil)
+            let newVC = UIViewController()
+            newVC.modalPresentationStyle = .overFullScreen
+            vc.present(newVC, animated: false) {
+                newVC.present(self.detailVC, animated: true, completion: nil)
+            }
         } else {
             
             resetAnimated()
@@ -255,11 +260,13 @@ import UIKit
 extension Card: UIViewControllerTransitioningDelegate {
     
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return Animator(presenting: true, from: self)
+        animator = Animator(presenting: true, from: self)
+        return animator
     }
     
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return Animator(presenting: false, from: self)
+        animator = Animator(presenting: false, from: self)
+        return animator
     }
 
 }
